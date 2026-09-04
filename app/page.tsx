@@ -1,8 +1,51 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 export default function Home() {
+    const [theme, setTheme] = useState<"dark" | "light">("dark");
+    const [portraitMode, setPortraitMode] = useState<"professional" | "field">(
+  "professional"
+);
+const [mdhImage, setMdhImage] = useState(0);
+const mdhImages = [
+  {
+    src: "/images/projects/mini-design-house/01-construction.jpg",
+    label: "CONSTRUCTION",
+  },
+  {
+    src: "/images/projects/mini-design-house/02-supervision.jpg",
+    label: "SUPERVISION",
+  },
+  {
+    src: "/images/projects/mini-design-house/03-closeout.jpg",
+    label: "CLOSEOUT",
+  },
+  {
+    src: "/images/projects/mini-design-house/04-completed.jpg",
+    label: "DELIVERY",
+  },
+];
+      function toggleTheme() {
+  const nextTheme = theme === "dark" ? "light" : "dark";
+
+  setTheme(nextTheme);
+  localStorage.setItem("theme", nextTheme);
+}
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "dark" || savedTheme === "light") {
+      setTheme(savedTheme);
+    }
+  }, []);
   return (
-    <main className="min-h-screen">
+    <main
+  data-theme={theme}
+  className="min-h-screen bg-[var(--background)] text-[var(--foreground)] transition-colors duration-500"
+>
       {/* Navigation */}
-      <nav className="flex items-center justify-between border-b border-[var(--line)] px-6 py-5 md:px-10 lg:px-16">
+      <nav className="flex items-center justify-between border-b border-[var(--line)] bg-[var(--background)]/80 px-6 py-5 backdrop-blur-md md:px-10 lg:px-16">
        <a
   href="#"
   className="text-lg font-semibold tracking-[-0.02em] md:text-xl"
@@ -19,95 +62,141 @@ export default function Home() {
         </div>
 
         <button
-          type="button"
-          aria-label="Toggle color theme"
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--line)] text-sm"
-        >
-          ◐
-        </button>
+  type="button"
+  onClick={toggleTheme}
+  aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+  className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--line)] text-base transition-all duration-300 hover:scale-105"
+>
+  {theme === "dark" ? (
+  <svg
+    viewBox="0 0 24 24"
+    className="h-[17px] w-[17px]"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="3.5" />
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+  </svg>
+) : (
+  <svg
+    viewBox="0 0 24 24"
+    className="h-[17px] w-[17px]"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    aria-hidden="true"
+  >
+    <path d="M20.5 15.2A8.5 8.5 0 0 1 8.8 3.5 8.5 8.5 0 1 0 20.5 15.2Z" />
+  </svg>
+)}
+</button>
       </nav>
 
-           {/* Hero */}
-      <section className="relative flex min-h-[calc(100vh-80px)] flex-col overflow-hidden px-6 py-8 md:px-10 md:py-10 lg:px-16">
+                       {/* Hero */}
+      <section className="relative min-h-[calc(100vh-80px)] overflow-hidden border-b border-[var(--line)]">
 
-        {/* Layered technical background */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0"
-        >
-          {/* Grid */}
-          <div
-            className="absolute inset-0 opacity-[0.045]"
-            style={{
-              backgroundImage:
-                "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
-              backgroundSize: "56px 56px",
-            }}
-          />
+        {/* Full-background image */}
+        <img
+  src={
+    theme === "dark"
+      ? "/images/hero/hero-construction-dark.jpg"
+      : "/images/hero/hero-construction-light.jpg"
+  }
+  alt=""
+  aria-hidden="true"
+  className="absolute inset-0 h-full w-full object-cover object-center transition-all duration-700"
+/>
+{/* Theme-aware photo treatment */}
+<div
+  className={`absolute inset-0 transition-colors duration-700 ${
+    theme === "dark" ? "bg-black/25" : "bg-[#f1efe9]/10"
+  }`}
+/>
 
-          {/* Large soft light */}
-          <div
-            className="absolute -right-[15%] -top-[20%] h-[70vw] w-[70vw] rounded-full opacity-20 blur-3xl"
-            style={{
-              background:
-                "radial-gradient(circle, var(--muted) 0%, transparent 65%)",
-            }}
-          />
+{/* Theme-aware readability gradient */}
+<div
+  className="absolute inset-0 transition-all duration-700"
+  style={{
+    background:
+      theme === "dark"
+        ? "linear-gradient(90deg, rgba(15,17,16,0.96) 0%, rgba(15,17,16,0.88) 34%, rgba(15,17,16,0.48) 58%, rgba(15,17,16,0.08) 78%, rgba(15,17,16,0.02) 100%)"
+        : "linear-gradient(90deg, rgba(241,239,233,0.97) 0%, rgba(241,239,233,0.92) 30%, rgba(241,239,233,0.72) 48%, rgba(241,239,233,0.30) 68%, rgba(241,239,233,0.05) 88%, rgba(241,239,233,0.00) 100%)",
+  }}
+/>
+        {/* Hero content */}
+        <div className="relative z-10 flex min-h-[calc(100vh-80px)] flex-col px-6 py-8 text-[var(--foreground)] md:px-10 md:py-10 lg:px-16">
 
-          {/* Architectural vertical line */}
-          <div className="absolute bottom-0 right-[18%] top-0 w-px bg-[var(--line)] opacity-60" />
-
-          {/* Architectural horizontal line */}
-          <div className="absolute left-0 right-0 top-[38%] h-px bg-[var(--line)] opacity-40" />
-        </div>
-
-        {/* Hero top */}
-     {/* Hero top */}
-<div className="relative z-10 flex items-start justify-end">
-  <div className="text-right">
-    <p className="text-xs tracking-[0.2em] text-[var(--muted)]">
-      PANAMA / USA
-    </p>
-  </div>
-</div>
-
-        {/* Main statement */}
-        <div className="relative z-10 my-auto py-12">
-          <h1 className="max-w-[95rem] text-[clamp(3.4rem,8.4vw,8.5rem)] font-semibold leading-[0.82] tracking-[-0.065em]">
-            <span className="block">CONSTRUCTION.</span>
-            <span className="block">MANAGEMENT.</span>
-            <span className="block">TECHNOLOGY.</span>
-          </h1>
-
-          {/* Core statement */}
-          <div className="mt-8 border-l border-[var(--line)] pl-5 md:mt-10 md:pl-7">
-            <p className="text-base tracking-[0.08em] text-[var(--muted)] md:text-xl">
-              GREAT ON THEIR OWN.
+          {/* Top metadata */}
+          <div className="flex items-center justify-between">
+            <p className="text-[10px] tracking-[0.2em] text-[#b4b5b1]">
+              CIVIL ENGINEER / ASU
             </p>
 
-            <p className="mt-1 text-3xl font-semibold tracking-[-0.04em] md:text-5xl">
-              BETTER TOGETHER.
+            <p className="text-[10px] tracking-[0.2em] text-[#b4b5b1]">
+              PANAMA / USA
             </p>
           </div>
-        </div>
 
-        {/* Hero bottom */}
-        <div className="relative z-10 grid gap-8 border-t border-[var(--line)] pt-6 md:grid-cols-2">
-          <div>
-            <p className="max-w-lg text-sm leading-6 text-[var(--muted)]">
+          {/* Main statement */}
+          <div className="my-auto py-12">
+            <h1 className="max-w-5xl text-[clamp(3.3rem,7.2vw,8rem)] font-semibold leading-[0.82] tracking-[-0.065em]">
+              <span className="block">CONSTRUCTION.</span>
+              <span className="block">MANAGEMENT.</span>
+              <span className="block">TECHNOLOGY.</span>
+            </h1>
+
+            {/* Better Together */}
+            <div className="mt-8 border-l-2 border-[#b7975d] pl-5 md:mt-10">
+              <p className="text-base tracking-[0.05em] text-[#b4b5b1] md:text-lg">
+                GREAT ON THEIR OWN.
+              </p>
+
+              <p className="mt-1 text-3xl font-semibold tracking-[-0.04em] md:text-4xl">
+                BETTER TOGETHER.
+              </p>
+            </div>
+
+            {/* Intro */}
+            <p className="mt-8 max-w-md text-sm leading-6 text-[#b4b5b1]">
               Civil Engineer &amp; M.S. Construction Management and Technology
               Student at Arizona State University.
             </p>
+
+            {/* Actions */}
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href="#projects"
+                className="border border-[#b7975d] bg-[#b7975d] px-5 py-3 text-[10px] font-semibold tracking-[0.16em] text-[#171918] transition-opacity hover:opacity-80"
+              >
+                VIEW PROJECTS →
+              </a>
+
+              <a
+                href="#contact"
+                className="border border-white/25 px-5 py-3 text-[10px] font-semibold tracking-[0.16em] transition-colors hover:bg-[#f1efe9] hover:text-[#171918]"
+              >
+                GET IN TOUCH
+              </a>
+            </div>
           </div>
 
-          <div className="flex items-end md:justify-end">
+          {/* Bottom */}
+          <div className="flex items-end justify-between">
             <a
               href="#about"
-              className="text-xs font-semibold tracking-[0.16em]"
+              className="text-[9px] tracking-[0.2em] text-[#b4b5b1]"
             >
-              EXPLORE ↓
+              SCROLL ↓
             </a>
+
+            <div className="text-right text-[9px] tracking-[0.18em] text-[#b4b5b1]">
+              <p>CONSTRUCTION / MANAGEMENT</p>
+              <p className="mt-1">TECHNOLOGY / 2026</p>
+            </div>
           </div>
+
         </div>
       </section>
                   {/* About */}
@@ -134,10 +223,29 @@ export default function Home() {
               01 / ABOUT
             </p>
 
-            <div className="mt-10 hidden min-h-[320px] items-center justify-center border border-[var(--line)] lg:flex">
-  <p className="text-[10px] tracking-[0.18em] text-[var(--muted)]">
-    PORTRAIT / TO BE ADDED
-  </p>
+            <div
+  onMouseEnter={() => setPortraitMode("field")}
+onMouseLeave={() => setPortraitMode("professional")}
+  className="relative mt-10 hidden aspect-[4/5] overflow-hidden lg:block"
+>
+  <img
+    src="/images/about/about-professional.jpeg"
+    alt="Juan D. Carranza"
+    className={`absolute inset-0 h-full w-full object-cover object-center transition-all duration-700 ${
+  portraitMode === "professional" ? "opacity-100" : "opacity-0"
+} ${
+  theme === "dark"
+    ? "brightness-[0.82] saturate-[0.65] contrast-[1.05]"
+    : "brightness-[0.98] saturate-[0.9]"
+}`}
+  />
+  <img
+  src="/images/about/about-field.jpg"
+  alt="Juan D. Carranza on a construction site in Panama City"
+  className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-700 ${
+  portraitMode === "field" ? "opacity-100" : "opacity-0"
+}`}
+/>
 </div>
           </div>
 
@@ -520,68 +628,182 @@ export default function Home() {
               <div className="grid gap-10 md:grid-cols-[1fr_2fr]">
 
                 <div>
-                  <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
-                    01 / PROJECT CLOSEOUT
-                  </p>
+  <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
+    01 / PROJECT CLOSEOUT
+  </p>
 
-                  <p className="mt-3 text-sm text-[var(--muted)]">
-                    PANAMA CITY, PANAMA
-                  </p>
-                </div>
+  <p className="mt-3 text-sm text-[var(--muted)]">
+    PANAMA CITY, PANAMA
+  </p>
 
-                <div>
-                  <div className="flex flex-wrap items-start justify-between gap-6">
-                    <h3 className="text-3xl font-semibold tracking-[-0.04em] md:text-5xl">
-                      PH MINI DESIGN
-                      <br />
-                      HOUSE 57
-                    </h3>
+  <p className="mt-8 max-w-xs text-sm leading-7 text-[var(--muted)]">
+    Helped lead the completion and handover of a 20-story residential
+    project after the original contractor exited the project, working
+    under a limited closeout budget and tight delivery schedule.
+  </p>
 
-                    <span className="text-2xl transition-transform duration-300 group-hover:translate-x-2">
-                      ↗
-                    </span>
-                  </div>
+  <div className="mt-10 space-y-6 border-t border-[var(--line)] pt-6">
+    <div>
+      <p className="text-[10px] tracking-[0.16em] text-[var(--muted)]">
+        SCALE
+      </p>
+      <p className="mt-2 text-base">20 Stories</p>
+    </div>
 
-                  <div className="mt-10 grid gap-8 md:grid-cols-3">
-                    <div>
-                      <p className="text-xs tracking-[0.16em] text-[var(--muted)]">
-                        SCALE
-                      </p>
-                      <p className="mt-2">20 Stories</p>
-                    </div>
+    <div>
+      <p className="text-[10px] tracking-[0.16em] text-[var(--muted)]">
+        ROLE
+      </p>
+      <p className="mt-2 text-base">
+        Works Supervisor / PM Assistant
+      </p>
+    </div>
 
-                    <div>
-                      <p className="text-xs tracking-[0.16em] text-[var(--muted)]">
-                        ROLE
-                      </p>
-                      <p className="mt-2">
-                        Works Supervisor / PM Assistant
-                      </p>
-                    </div>
+    <div>
+      <p className="text-[10px] tracking-[0.16em] text-[var(--muted)]">
+        FOCUS
+      </p>
+      <p className="mt-2 text-base">
+        Supervision / Closeout / Delivery
+      </p>
+    </div>
+  </div>
+</div>
 
-                    <div>
-                      <p className="text-xs tracking-[0.16em] text-[var(--muted)]">
-                        FOCUS
-                      </p>
-                      <p className="mt-2">
-                        Supervision / Closeout / Delivery
-                      </p>
-                    </div>
-                  </div>
+<div>
+  <div className="flex flex-wrap items-start justify-between gap-6">
+    <h3 className="text-3xl font-semibold tracking-[-0.04em] md:text-5xl">
+      PH MINI DESIGN HOUSE 57
+    </h3>
 
-                  <p className="mt-10 max-w-3xl text-base leading-7 text-[var(--muted)]">
-                    Helped lead the completion and handover of a 20-story
-                    residential project after the original contractor exited
-                    the project, working under a limited closeout budget and
-                    tight delivery schedule.
-                  </p>
+    <span className="text-2xl transition-transform duration-300 group-hover:translate-x-2">
+      ↗
+    </span>
+  </div>
 
-                  {/* Image placeholder */}
-                  <div className="mt-10 flex aspect-[16/7] items-center justify-center border border-[var(--line)] bg-[var(--line)]/10">
-                    <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
-                      PROJECT IMAGE / COMING SOON
-                    </p>
-                  </div>
+{/* MDH Gallery */}
+<div className="mt-10">
+  <div className="relative -mx-24 grid grid-cols-[0.85fr_1.7fr_0.85fr] items-center">
+
+    {/* Previous */}
+    <button
+      type="button"
+      onClick={() =>
+        setMdhImage((mdhImage - 1 + mdhImages.length) % mdhImages.length)
+      }
+      className="group relative z-10 -mr-24 translate-x-10 text-left"
+    >
+      <div className="relative aspect-[4/5] overflow-hidden">
+        <img
+          src={
+            mdhImages[
+              (mdhImage - 1 + mdhImages.length) % mdhImages.length
+            ].src
+          }
+          alt={
+            mdhImages[
+              (mdhImage - 1 + mdhImages.length) % mdhImages.length
+            ].label
+          }
+          className="h-full w-full object-cover opacity-55 transition-transform duration-500 group-hover:scale-[1.02]"
+        />
+        <div
+  aria-hidden="true"
+  className={`pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-transparent ${
+    theme === "dark"
+      ? "to-[var(--background)]/30"
+      : "to-[var(--background)]/70"
+  }`}
+/>
+      </div>
+
+      <p className="relative z-30 mt-3 text-[9px] tracking-[0.16em] text-[var(--muted)]">
+        {String(
+          ((mdhImage - 1 + mdhImages.length) % mdhImages.length) + 1
+        ).padStart(2, "0")}{" "}
+        /{" "}
+        {
+          mdhImages[
+            (mdhImage - 1 + mdhImages.length) % mdhImages.length
+          ].label
+        }
+      </p>
+    </button>
+
+   {/* Active */}
+<div className="relative z-20 mx-auto w-fit">
+  <div className="h-[590px] overflow-hidden shadow-2xl">
+    <img
+      key={mdhImage}
+      src={mdhImages[mdhImage].src}
+      alt={`PH Mini Design House 57 — ${mdhImages[mdhImage].label}`}
+      className="h-full w-auto max-w-none animate-[mdhReveal_650ms_ease-out] object-contain"
+    />
+  </div>
+
+  <div className="mt-4 flex w-full items-end justify-between">
+    <div className="text-left">
+      <p className="text-xs font-medium tracking-[0.18em] text-[var(--muted)]">
+        {String(mdhImage + 1).padStart(2, "0")} / 04
+      </p>
+
+      <p className="mt-1 text-xl font-semibold tracking-[0.1em]">
+        {mdhImages[mdhImage].label}
+      </p>
+    </div>
+
+    <div className="flex gap-2">
+      <button
+        type="button"
+        onClick={() =>
+          setMdhImage(
+            (mdhImage - 1 + mdhImages.length) % mdhImages.length
+          )
+        }
+        aria-label="Previous Mini Design House image"
+        className="flex h-9 w-9 items-center justify-center border border-[var(--line)] transition-colors hover:bg-[var(--foreground)] hover:text-[var(--background)]"
+      >
+        ←
+      </button>
+
+      <button
+        type="button"
+        onClick={() =>
+          setMdhImage((mdhImage + 1) % mdhImages.length)
+        }
+        aria-label="Next Mini Design House image"
+        className="flex h-9 w-9 items-center justify-center border border-[var(--line)] transition-colors hover:bg-[var(--foreground)] hover:text-[var(--background)]"
+      >
+        →
+      </button>
+    </div>
+  </div>
+</div>
+
+    {/* Next */}
+    <button
+      type="button"
+      onClick={() =>
+        setMdhImage((mdhImage + 1) % mdhImages.length)
+      }
+      className="group relative z-10 -ml-24 -translate-x-10 text-left"
+    >
+     <div className="aspect-[4/5] overflow-hidden">
+        <img
+          src={mdhImages[(mdhImage + 1) % mdhImages.length].src}
+          alt={mdhImages[(mdhImage + 1) % mdhImages.length].label}
+          className="h-full w-full object-cover opacity-55 transition-transform duration-500 group-hover:scale-[1.02]"
+        />
+      </div>
+
+      <p className="relative z-30 mt-3 text-right text-[9px] tracking-[0.16em] text-[var(--muted)]">
+        {String(((mdhImage + 1) % mdhImages.length) + 1).padStart(2, "0")}{" "}
+        / {mdhImages[(mdhImage + 1) % mdhImages.length].label}
+      </p>
+    </button>
+
+  </div>
+</div>
                 </div>
               </div>
             </article>
