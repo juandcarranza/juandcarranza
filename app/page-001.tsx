@@ -11,14 +11,6 @@ const [mdhImage, setMdhImage] = useState(0);
 const [mdhDirection, setMdhDirection] = useState<"left" | "right">("right");
 const [mdhPreviousImage, setMdhPreviousImage] = useState<number | null>(null);
 const [mdhManualPause, setMdhManualPause] = useState(false);
-const [amazonasImage, setAmazonasImage] = useState(0);
-const [amazonasDirection, setAmazonasDirection] = useState<"left" | "right">("right");
-const [amazonasPreviousImage, setAmazonasPreviousImage] = useState<number | null>(null);
-const [amazonasManualPause, setAmazonasManualPause] = useState(false);
-const [walkerImage, setWalkerImage] = useState(0);
-const [walkerDirection, setWalkerDirection] = useState<"left" | "right">("right");
-const [walkerPreviousImage, setWalkerPreviousImage] = useState<number | null>(null);
-const [walkerManualPause, setWalkerManualPause] = useState(false);
 useEffect(() => {
   if (mdhManualPause) return;
 
@@ -42,56 +34,6 @@ useEffect(() => {
 
   return () => clearTimeout(resumeTimer);
 }, [mdhManualPause, mdhImage]);
-
-useEffect(() => {
-  if (amazonasManualPause) return;
-
-  const timer = setInterval(() => {
-    setAmazonasDirection("right");
-
-    setAmazonasImage((currentImage) => {
-      setAmazonasPreviousImage(currentImage);
-      return (currentImage + 1) % amazonasImages.length;
-    });
-  }, 5300);
-
-  return () => clearInterval(timer);
-}, [amazonasManualPause]);
-
-useEffect(() => {
-  if (!amazonasManualPause) return;
-
-  const resumeTimer = setTimeout(() => {
-    setAmazonasManualPause(false);
-  }, 10000);
-
-  return () => clearTimeout(resumeTimer);
-}, [amazonasManualPause, amazonasImage]);
-useEffect(() => {
-  if (walkerManualPause) return;
-
-  const timer = setInterval(() => {
-    setWalkerDirection("right");
-
-    setWalkerImage((currentImage) => {
-      setWalkerPreviousImage(currentImage);
-      return (currentImage + 1) % walkerImages.length;
-    });
-  }, 5300);
-
-  return () => clearInterval(timer);
-}, [walkerManualPause]);
-
-useEffect(() => {
-  if (!walkerManualPause) return;
-
-  const resumeTimer = setTimeout(() => {
-    setWalkerManualPause(false);
-  }, 10000);
-
-  return () => clearTimeout(resumeTimer);
-}, [walkerManualPause, walkerImage]);
-
 const mdhImages = [
   {
     src: "/images/projects/mini-design-house/01-construction.jpg",
@@ -108,53 +50,6 @@ const mdhImages = [
   {
     src: "/images/projects/mini-design-house/04-completed.jpg",
     label: "DELIVERY",
-  },
-];
-
-const amazonasImages = [
-  {
-    src: "/images/projects/amazonas/01-existing-conditions.jpeg",
-    label: "EXISTING CONDITIONS",
-  },
-  {
-    src: "/images/projects/amazonas/02-site-preparation.jpg",
-    label: "SITE PREPARATION",
-  },
-  {
-    src: "/images/projects/amazonas/03-piling.jpg",
-    label: "PILING",
-  },
-  {
-    src: "/images/projects/amazonas/04-supervision.jpg",
-    label: "SUPERVISION",
-  },
-];
-
-const walkerImages = [
-  {
-    src: "/images/projects/the-walker/01-structure.jpg",
-    label: "STRUCTURE",
-    labelOffset: "12.5%",
-  },
-  {
-    src: "/images/projects/the-walker/02-coordination.jpg",
-    label: "COORDINATION",
-    labelOffset: "21.875%",
-  },
-  {
-    src: "/images/projects/the-walker/03-field-leadership.jpg",
-    label: "FIELD LEADERSHIP",
-    labelOffset: "12.5%",
-  },
-  {
-    src: "/images/projects/the-walker/04-production.jpg",
-    label: "PRODUCTION",
-    labelOffset: "0",
-  },
-  {
-    src: "/images/projects/the-walker/05-progress.jpg",
-    label: "PROGRESS",
-    labelOffset: "12.5%",
   },
 ];
       function toggleTheme() {
@@ -979,234 +874,65 @@ onMouseLeave={() => setPortraitMode("professional")}
               <div className="grid gap-10 md:grid-cols-[1fr_2fr]">
 
                 <div>
-  <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
-    02 / PRECONSTRUCTION + FOUNDATIONS
-  </p>
+                  <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
+                    02 / PRECONSTRUCTION + FOUNDATIONS
+                  </p>
 
-  <p className="mt-3 text-sm text-[var(--muted)]">
-    PANAMA CITY, PANAMA
-  </p>
+                  <p className="mt-3 text-sm text-[var(--muted)]">
+                    PANAMA CITY, PANAMA
+                  </p>
+                </div>
 
-  <p className="mt-8 max-w-xs text-sm leading-7 text-[var(--muted)]">
-    Supported budgeting and project kickoff before supervising piling and
-    foundation activities, including coordination of concrete, reinforcing
-    steel, earthwork, and surrounding stakeholders.
-  </p>
+                <div>
+                  <div className="flex flex-wrap items-start justify-between gap-6">
+                    <h3 className="text-3xl font-semibold tracking-[-0.04em] md:text-5xl">
+                      PH AMAZONAS
+                    </h3>
 
-  <div className="mt-10 max-w-xs space-y-6 border-t border-[var(--line)] pt-6">
-    <div>
-      <p className="text-sm font-semibold tracking-[0.16em] text-[var(--foreground)]">
-        SCALE
-      </p>
-     <p className="mt-2 text-base leading-7 text-[var(--muted)]">
-        32 Stories
-      </p>
-    </div>
+                    <span className="text-2xl transition-transform duration-300 group-hover:translate-x-2">
+                      ↗
+                    </span>
+                  </div>
 
-    <div>
-      <p className="text-sm font-semibold tracking-[0.16em] text-[var(--foreground)]">
-        ROLE
-      </p>
-      <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
-        PM Assistant / Works Supervisor
-      </p>
-    </div>
+                  <div className="mt-10 grid gap-8 md:grid-cols-3">
+                    <div>
+                      <p className="text-xs tracking-[0.16em] text-[var(--muted)]">
+                        SCALE
+                      </p>
+                      <p className="mt-2">32 Stories</p>
+                    </div>
 
-    <div>
-      <p className="text-sm font-semibold tracking-[0.16em] text-[var(--foreground)]">
-        FOCUS
-      </p>
-      <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
-        Budgeting / Bidding / Piling
-      </p>
-    </div>
-  </div>
-</div>
+                    <div>
+                      <p className="text-xs tracking-[0.16em] text-[var(--muted)]">
+                        ROLE
+                      </p>
+                      <p className="mt-2">
+                        PM Assistant / Works Supervisor
+                      </p>
+                    </div>
 
-<div>
- <div className="-mx-8 flex items-start justify-between xl:-mx-24">
-  <h3 className="translate-x-4 whitespace-nowrap text-3xl font-semibold tracking-[-0.04em] md:text-5xl xl:translate-x-10">
-    PH AMAZONAS
-  </h3>
+                    <div>
+                      <p className="text-xs tracking-[0.16em] text-[var(--muted)]">
+                        FOCUS
+                      </p>
+                      <p className="mt-2">
+                        Budgeting / Bidding / Piling
+                      </p>
+                    </div>
+                  </div>
 
-  <span className="text-2xl transition-transform duration-300 group-hover:translate-x-2">
-    ↗
-  </span>
-</div>
+                  <p className="mt-10 max-w-3xl text-base leading-7 text-[var(--muted)]">
+                    Supported budgeting and project kickoff before supervising
+                    piling and foundation activities, including coordination
+                    of concrete, reinforcing steel, earthwork, and surrounding
+                    stakeholders.
+                  </p>
 
-{/* Amazonas Gallery */}
-<div className="mt-10">
- <div className="relative grid grid-cols-[0.85fr_1.7fr_0.85fr] items-center xl:-mx-24">
-
-    {/* Previous */}
-    <button
-      type="button"
-      onClick={() => {
-        setAmazonasManualPause(true);
-  setAmazonasDirection("left");
-  setAmazonasPreviousImage(amazonasImage);
-  setAmazonasImage(
-    (amazonasImage - 1 + amazonasImages.length) % amazonasImages.length
-  );
-}}
-      className="group relative z-10 -mr-8 translate-x-3 text-left xl:-mr-24 xl:translate-x-10"
-    >
-      <div className="relative aspect-[4/5] overflow-hidden">
-        <img
-          src={
-            amazonasImages[
-              (amazonasImage - 1 + amazonasImages.length) % amazonasImages.length
-            ].src
-          }
-          alt={
-            amazonasImages[
-              (amazonasImage - 1 + amazonasImages.length) % amazonasImages.length
-            ].label
-          }
-          className="h-full w-full object-cover opacity-55 transition-transform duration-500 group-hover:scale-[1.02]"
-        />
-        <div
-  aria-hidden="true"
-  className={`pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-transparent ${
-    theme === "dark"
-      ? "to-[var(--background)]/30"
-      : "to-[var(--background)]/70"
-  }`}
-/>
-      </div>
-
-      <p className="relative z-40 mt-3 text-[9px] tracking-[0.16em] text-[var(--muted)]">
-        {String(
-          ((amazonasImage - 1 + amazonasImages.length) % amazonasImages.length) + 1
-        ).padStart(2, "0")}{" "}
-        /{" "}
-        {
-          amazonasImages[
-            (amazonasImage - 1 + amazonasImages.length) % amazonasImages.length
-          ].label
-        }
-      </p>
-    </button>
-
-  {/* Active */}
-<div className="relative z-20 mx-auto w-[clamp(300px,42vw,590px)]">
-  <div className="relative flex h-[clamp(260px,42vw,590px)] w-full items-center justify-center overflow-visible">
-    <img
-      key={amazonasImage}
-      src={amazonasImages[amazonasImage].src}
-      alt={`PH Amazonas — ${amazonasImages[amazonasImage].label}`}
-      className={`h-full w-auto max-w-none object-contain shadow-2xl ${
-  amazonasDirection === "right"
-  ? "animate-[mdhFromRight_1300ms_cubic-bezier(0.22,1,0.36,1)]"
-  : "animate-[mdhFromLeft_1300ms_cubic-bezier(0.22,1,0.36,1)]"
-}`}
-    />
-    {amazonasPreviousImage !== null && (
-  <img
-    key={`outgoing-${amazonasPreviousImage}-${amazonasImage}`}
-    src={amazonasImages[amazonasPreviousImage].src}
-    alt=""
-    aria-hidden="true"
-    onAnimationEnd={() => setAmazonasPreviousImage(null)}
-    className={`pointer-events-none absolute left-1/2 top-0 z-30 h-full w-auto max-w-none -translate-x-1/2 object-contain shadow-2xl ${
-      amazonasDirection === "right"
-        ? "animate-[mdhOutLeft_1300ms_cubic-bezier(0.22,1,0.36,1)_forwards]"
-        : "animate-[mdhOutRight_1300ms_cubic-bezier(0.22,1,0.36,1)_forwards]"
-    }`}
-  />
-)}
-  </div>
-
-<div
-  className="mx-auto mt-4 flex items-end justify-between"
-  style={{
-    width:
-      amazonasImage === 2
-        ? "100%"
-        : amazonasImage === 0
-        ? "59%"
-        : "73.75%",
-  }}
->
-  <div className="text-left">
-    <p className="text-xs font-medium tracking-[0.18em] text-[var(--muted)]">
-      {String(amazonasImage + 1).padStart(2, "0")} / 04
-    </p>
-
-    <p className="mt-1 max-w-[230px] text-xl font-semibold leading-tight tracking-[0.1em]">
-  {amazonasImage === 0 ? (
-    <>
-      EXISTING
-      <br />
-      CONDITIONS
-    </>
-  ) : (
-    amazonasImages[amazonasImage].label
-  )}
-</p>
-  </div>
-
-    <div className="flex gap-2">
-      <button
-        type="button"
-       onClick={() => {
-  setAmazonasManualPause(true);
-  setAmazonasDirection("left");
-  setAmazonasPreviousImage(amazonasImage);
-  setAmazonasImage(
-    (amazonasImage - 1 + amazonasImages.length) % amazonasImages.length
-  );
-}}
-        aria-label="Previous Amazonas image"
-        className="flex h-9 w-9 items-center justify-center border border-[var(--line)] transition-colors hover:bg-[var(--foreground)] hover:text-[var(--background)]"
-      >
-        ←
-      </button>
-
-      <button
-        type="button"
-       onClick={() => {
-  setAmazonasManualPause(true);
-  setAmazonasDirection("right");
-  setAmazonasPreviousImage(amazonasImage);
-  setAmazonasImage((amazonasImage + 1) % amazonasImages.length);
-}}
-        aria-label="Next Amazonas image"
-        className="flex h-9 w-9 items-center justify-center border border-[var(--line)] transition-colors hover:bg-[var(--foreground)] hover:text-[var(--background)]"
-      >
-        →
-      </button>
-    </div>
-  </div>
-</div>
-
-    {/* Next */}
-    <button
-      type="button"
-     onClick={() => {
-  setAmazonasManualPause(true);
-  setAmazonasDirection("right");
-  setAmazonasPreviousImage(amazonasImage);
-  setAmazonasImage((amazonasImage + 1) % amazonasImages.length);
-}}
-     className="group relative z-10 -ml-10 -translate-x-4 text-left xl:-ml-24 xl:-translate-x-10"
-    >
-     <div className="aspect-[4/5] overflow-hidden">
-        <img
-          src={amazonasImages[(amazonasImage + 1) % amazonasImages.length].src}
-          alt={amazonasImages[(amazonasImage + 1) % amazonasImages.length].label}
-          className="h-full w-full object-cover opacity-55 transition-transform duration-500 group-hover:scale-[1.02]"
-        />
-      </div>
-
-      <p className="relative z-40 mt-3 text-right text-[9px] tracking-[0.16em] text-[var(--muted)]">
-        {String(((amazonasImage + 1) % amazonasImages.length) + 1).padStart(2, "0")}{" "}
-        / {amazonasImages[(amazonasImage + 1) % amazonasImages.length].label}
-      </p>
-    </button>
-
-  </div>
-</div>
+                  <div className="mt-10 flex aspect-[16/7] items-center justify-center border border-[var(--line)] bg-[var(--line)]/10">
+                    <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
+                      PROJECT IMAGE / COMING SOON
+                    </p>
+                  </div>
                 </div>
               </div>
             </article>
@@ -1223,47 +949,11 @@ onMouseLeave={() => setPortraitMode("professional")}
                   <p className="mt-3 text-sm text-[var(--muted)]">
                     PANAMA CITY, PANAMA
                   </p>
-
-                  <p className="mt-8 max-w-xs text-sm leading-7 text-[var(--muted)]">
-                    Progressed from preconstruction and field supervision into
-                    production leadership, coordinating structural activities,
-                    procurement, schedules, field resources, and a workforce of
-                    more than 60 personnel.
-                  </p>
-
-                  <div className="mt-10 max-w-xs space-y-6 border-t border-[var(--line)] pt-6">
-                    <div>
-                      <p className="text-sm font-semibold tracking-[0.16em] text-[var(--foreground)]">
-                        SCALE
-                      </p>
-                      <p className="mt-2 text-base leading-7 text-[var(--muted)]">
-                        35 Stories
-                      </p>
-                    </div>
-
-                    <div>
-                      <p className="text-sm font-semibold tracking-[0.16em] text-[var(--foreground)]">
-                        ROLE
-                      </p>
-                      <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
-                        PM Assistant → Production Lead
-                      </p>
-                    </div>
-
-                    <div>
-                      <p className="text-sm font-semibold tracking-[0.16em] text-[var(--foreground)]">
-                        FOCUS
-                      </p>
-                      <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
-                        Structure / Procurement / Leadership
-                      </p>
-                    </div>
-                  </div>
                 </div>
 
                 <div>
-                  <div className="-mx-8 flex items-start justify-between xl:-mx-24">
-                    <h3 className="translate-x-4 whitespace-nowrap text-3xl font-semibold tracking-[-0.04em] md:text-5xl xl:translate-x-10">
+                  <div className="flex flex-wrap items-start justify-between gap-6">
+                    <h3 className="text-3xl font-semibold tracking-[-0.04em] md:text-5xl">
                       PH THE WALKER
                     </h3>
 
@@ -1272,176 +962,44 @@ onMouseLeave={() => setPortraitMode("professional")}
                     </span>
                   </div>
 
-                  {/* Walker Gallery */}
-                  <div className="mt-10">
-                    <div className="relative grid grid-cols-[0.85fr_1.7fr_0.85fr] items-center xl:-mx-24">
-
-                      {/* Previous */}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setWalkerManualPause(true);
-                          setWalkerDirection("left");
-                          setWalkerPreviousImage(walkerImage);
-                          setWalkerImage(
-                            (walkerImage - 1 + walkerImages.length) % walkerImages.length
-                          );
-                        }}
-                        className="group relative z-10 -mr-8 translate-x-3 text-left xl:-mr-24 xl:translate-x-10"
-                      >
-                        <div className="relative aspect-[4/5] overflow-hidden">
-                          <img
-                            src={
-                              walkerImages[
-                                (walkerImage - 1 + walkerImages.length) % walkerImages.length
-                              ].src
-                            }
-                            alt={
-                              walkerImages[
-                                (walkerImage - 1 + walkerImages.length) % walkerImages.length
-                              ].label
-                            }
-                            className="h-full w-full object-cover opacity-55 transition-transform duration-500 group-hover:scale-[1.02]"
-                          />
-                          <div
-                            aria-hidden="true"
-                            className={`pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-transparent ${
-                              theme === "dark"
-                                ? "to-[var(--background)]/30"
-                                : "to-[var(--background)]/70"
-                            }`}
-                          />
-                        </div>
-
-                        <p className="relative z-40 mt-3 text-[9px] tracking-[0.16em] text-[var(--muted)]">
-                          {String(
-                            ((walkerImage - 1 + walkerImages.length) % walkerImages.length) + 1
-                          ).padStart(2, "0")} / {
-                            walkerImages[
-                              (walkerImage - 1 + walkerImages.length) % walkerImages.length
-                            ].label
-                          }
-                        </p>
-                      </button>
-
-                      {/* Active */}
-                      <div className="relative z-20 mx-auto w-[clamp(300px,42vw,590px)]">
-                        <div className="relative flex h-[clamp(260px,42vw,590px)] w-full items-center justify-center overflow-visible">
-                          <img
-                            key={walkerImage}
-                            src={walkerImages[walkerImage].src}
-                            alt={`PH The Walker — ${walkerImages[walkerImage].label}`}
-                            className={`h-full w-auto max-w-none object-contain shadow-2xl ${
-                              walkerDirection === "right"
-                                ? "animate-[mdhFromRight_1300ms_cubic-bezier(0.22,1,0.36,1)]"
-                                : "animate-[mdhFromLeft_1300ms_cubic-bezier(0.22,1,0.36,1)]"
-                            }`}
-                          />
-
-                          {walkerPreviousImage !== null && (
-                            <img
-                              key={`walker-outgoing-${walkerPreviousImage}-${walkerImage}`}
-                              src={walkerImages[walkerPreviousImage].src}
-                              alt=""
-                              aria-hidden="true"
-                              onAnimationEnd={() => setWalkerPreviousImage(null)}
-                              className={`pointer-events-none absolute left-1/2 top-0 z-30 h-full w-auto max-w-none -translate-x-1/2 object-contain shadow-2xl ${
-                                walkerDirection === "right"
-                                  ? "animate-[mdhOutLeft_1300ms_cubic-bezier(0.22,1,0.36,1)_forwards]"
-                                  : "animate-[mdhOutRight_1300ms_cubic-bezier(0.22,1,0.36,1)_forwards]"
-                              }`}
-                            />
-                          )}
-                        </div>
-
-                        <div
-  className="mx-auto mt-4 flex items-end justify-between"
-  style={{
-    width:
-      walkerImage === 1
-        ? "81.25%"
-        : walkerImage === 3
-        ? "100%"
-        : "75%",
-  }}
->
-                          <div className="text-left">
-                            <p className="text-xs font-medium tracking-[0.18em] text-[var(--muted)]">
-                              {String(walkerImage + 1).padStart(2, "0")} / {String(walkerImages.length).padStart(2, "0")}
-                            </p>
-
-                            <p className="mt-1 max-w-[230px] text-xl font-semibold leading-tight tracking-[0.1em]">
-                              {walkerImage === 2 ? (
-                                <>
-                                  FIELD
-                                  <br />
-                                  LEADERSHIP
-                                </>
-                              ) : (
-                                walkerImages[walkerImage].label
-                              )}
-                            </p>
-                          </div>
-
-                          <div className="flex gap-2">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setWalkerManualPause(true);
-                                setWalkerDirection("left");
-                                setWalkerPreviousImage(walkerImage);
-                                setWalkerImage(
-                                  (walkerImage - 1 + walkerImages.length) % walkerImages.length
-                                );
-                              }}
-                              aria-label="Previous The Walker image"
-                              className="flex h-9 w-9 items-center justify-center border border-[var(--line)] transition-colors hover:bg-[var(--foreground)] hover:text-[var(--background)]"
-                            >
-                              ←
-                            </button>
-
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setWalkerManualPause(true);
-                                setWalkerDirection("right");
-                                setWalkerPreviousImage(walkerImage);
-                                setWalkerImage((walkerImage + 1) % walkerImages.length);
-                              }}
-                              aria-label="Next The Walker image"
-                              className="flex h-9 w-9 items-center justify-center border border-[var(--line)] transition-colors hover:bg-[var(--foreground)] hover:text-[var(--background)]"
-                            >
-                              →
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Next */}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setWalkerManualPause(true);
-                          setWalkerDirection("right");
-                          setWalkerPreviousImage(walkerImage);
-                          setWalkerImage((walkerImage + 1) % walkerImages.length);
-                        }}
-                        className="group relative z-10 -ml-10 -translate-x-4 text-left xl:-ml-24 xl:-translate-x-10"
-                      >
-                        <div className="aspect-[4/5] overflow-hidden">
-                          <img
-                            src={walkerImages[(walkerImage + 1) % walkerImages.length].src}
-                            alt={walkerImages[(walkerImage + 1) % walkerImages.length].label}
-                            className="h-full w-full object-cover opacity-55 transition-transform duration-500 group-hover:scale-[1.02]"
-                          />
-                        </div>
-
-                        <p className="relative z-40 mt-3 text-right text-[9px] tracking-[0.16em] text-[var(--muted)]">
-                          {String(((walkerImage + 1) % walkerImages.length) + 1).padStart(2, "0")} / {walkerImages[(walkerImage + 1) % walkerImages.length].label}
-                        </p>
-                      </button>
-
+                  <div className="mt-10 grid gap-8 md:grid-cols-3">
+                    <div>
+                      <p className="text-xs tracking-[0.16em] text-[var(--muted)]">
+                        SCALE
+                      </p>
+                      <p className="mt-2">35 Stories</p>
                     </div>
+
+                    <div>
+                      <p className="text-xs tracking-[0.16em] text-[var(--muted)]">
+                        ROLE
+                      </p>
+                      <p className="mt-2">
+                        PM Assistant → Production Lead
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="text-xs tracking-[0.16em] text-[var(--muted)]">
+                        FOCUS
+                      </p>
+                      <p className="mt-2">
+                        Structure / Procurement / Leadership
+                      </p>
+                    </div>
+                  </div>
+
+                  <p className="mt-10 max-w-3xl text-base leading-7 text-[var(--muted)]">
+                    Progressed from preconstruction and field supervision into
+                    production leadership, coordinating structural activities,
+                    procurement, schedules, and a workforce of more than 60
+                    personnel.
+                  </p>
+
+                  <div className="mt-10 flex aspect-[16/7] items-center justify-center border border-[var(--line)] bg-[var(--line)]/10">
+                    <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
+                      PROJECT IMAGE / COMING SOON
+                    </p>
                   </div>
                 </div>
               </div>
@@ -1455,10 +1013,10 @@ onMouseLeave={() => setPortraitMode("professional")}
         id="ai"
         className="relative overflow-hidden border-t border-[var(--line)] px-6 py-20 md:px-10 md:py-24 lg:px-16"
       >
-        {/* Background drafting grid */}
+        {/* Background detail */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.025]"
+          className="pointer-events-none absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage:
               "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
@@ -1467,6 +1025,7 @@ onMouseLeave={() => setPortraitMode("professional")}
         />
 
         <div className="relative z-10 grid gap-12 lg:grid-cols-12">
+
           {/* Section label */}
           <div className="lg:col-span-3">
             <p className="text-xs tracking-[0.2em] text-[var(--muted)]">
@@ -1474,23 +1033,16 @@ onMouseLeave={() => setPortraitMode("professional")}
             </p>
 
             <p className="mt-6 max-w-xs text-sm leading-6 text-[var(--muted)]">
-              An evolving space for projects, AI agents, case studies, research,
-              and ideas exploring technology across the built environment.
+              An evolving collection of projects, AI agents, case studies,
+              research, and ideas exploring technology across the built
+              environment.
             </p>
-
-            <div className="mt-10 hidden border-t border-[var(--line)] pt-5 lg:block">
-              <p className="text-[10px] tracking-[0.18em] text-[var(--muted)]">
-                STATUS / IN DEVELOPMENT
-              </p>
-              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
-                This section is being built.
-              </p>
-            </div>
           </div>
 
           {/* Main content */}
           <div className="lg:col-span-9">
-            <div className="mb-12">
+
+            <div className="mb-14">
               <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
                 EXPLORING WHAT&apos;S POSSIBLE
               </p>
@@ -1503,118 +1055,96 @@ onMouseLeave={() => setPortraitMode("professional")}
 
               <p className="mt-8 max-w-2xl text-lg leading-8 text-[var(--muted)]">
                 My interest in construction technology comes from a principle
-                I&apos;ve carried from the field: there&apos;s always a better way.
-                This space will document how I&apos;m exploring AI, automation, BIM,
-                and emerging technologies to improve how projects are planned,
-                coordinated, managed, and delivered.
+                I&apos;ve carried from the field: there&apos;s always a better
+                way. This space documents how I&apos;m exploring AI and
+                emerging technologies as tools to improve how projects are
+                planned, coordinated, managed, and delivered.
               </p>
             </div>
 
-            {/* Living network */}
-            <div className="relative min-h-[560px] overflow-hidden border border-[var(--line)] md:min-h-[620px]">
-              <video
-                className={`pointer-events-none absolute left-1/2 top-1/2 h-[106%] w-[106%] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover transition-all duration-700 ${
-                  theme === "dark"
-                    ? "opacity-75 brightness-[0.72] contrast-[1.08] saturate-[0.75]"
-                    : "opacity-20 brightness-[1.35] contrast-[0.75] grayscale"
-                }`}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                aria-hidden="true"
-              >
-                <source src="/videos/ai-network-dark.mp4" type="video/mp4" />
-              </video>
+            {/* Areas */}
+            <div className="grid border-l border-t border-[var(--line)] md:grid-cols-2">
 
-              {/* Theme/readability treatment */}
-              <div
-                aria-hidden="true"
-                className={`pointer-events-none absolute inset-0 ${
-                  theme === "dark"
-                    ? "bg-[var(--background)]/20"
-                    : "bg-[var(--background)]/65"
-                }`}
-              />
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0"
-                style={{
-                  background:
-                    theme === "dark"
-                      ? "radial-gradient(circle at center, transparent 0%, rgba(23,25,24,0.08) 42%, rgba(23,25,24,0.72) 100%)"
-                      : "radial-gradient(circle at center, rgba(241,239,233,0.18) 0%, rgba(241,239,233,0.62) 58%, rgba(241,239,233,0.94) 100%)",
-                }}
-              />
+              {/* Projects */}
+              <div className="group relative min-h-[300px] border-b border-r border-[var(--line)] p-8 transition-all duration-500 hover:bg-[var(--foreground)] hover:text-[var(--background)]">
+                <p className="text-xs tracking-[0.18em] opacity-60">
+                  01 / PROJECTS
+                </p>
 
-              {/* Real HTML labels over the generated network */}
-              <div className="relative z-10 grid min-h-[560px] grid-cols-2 grid-rows-2 md:min-h-[620px]">
-                {[
-                  {
-                    number: "01",
-                    title: "PROJECTS",
-                    description: "Academic + independent work",
-                    position: "items-start justify-start text-left",
-                  },
-                  {
-                    number: "02",
-                    title: "AI AGENTS",
-                    description: "Intelligent construction workflows",
-                    position: "items-start justify-end text-right",
-                  },
-                  {
-                    number: "03",
-                    title: "CASE STUDIES",
-                    description: "Problems, processes + better solutions",
-                    position: "items-end justify-start text-left",
-                  },
-                  {
-                    number: "04",
-                    title: "RESEARCH + WRITING",
-                    description: "Ideas, observations + industry change",
-                    position: "items-end justify-end text-right",
-                  },
-                ].map((area) => (
-                  <div
-                    key={area.number}
-                    className={`flex p-6 md:p-8 ${area.position}`}
-                  >
-                    <div className="max-w-[250px] bg-[var(--background)]/70 p-4 backdrop-blur-[2px] md:p-5">
-                      <p className="text-[10px] tracking-[0.2em] text-[var(--muted)]">
-                        {area.number} / IN DEVELOPMENT
-                      </p>
-                      <h3 className="mt-3 text-xl font-semibold tracking-[0.04em] md:text-2xl">
-                        {area.title}
-                      </h3>
-                      <p className="mt-2 text-xs leading-5 text-[var(--muted)]">
-                        {area.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                <h3 className="mt-10 text-3xl font-semibold tracking-[-0.04em]">
+                  Projects
+                </h3>
+
+                <p className="mt-4 max-w-sm text-sm leading-6 opacity-70">
+                  Academic and independent work exploring construction,
+                  management, technology, AI, BIM, and related topics.
+                </p>
+
+                <p className="absolute bottom-8 left-8 text-xs tracking-[0.16em]">
+                  EXPLORE →
+                </p>
               </div>
 
-              {/* Center marker */}
-              <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2">
-                <div className="flex h-20 w-20 items-center justify-center rounded-full border border-[#b7975d]/60 bg-[var(--background)]/75 backdrop-blur-sm md:h-24 md:w-24">
-                  <div className="text-center">
-                    <p className="text-[9px] tracking-[0.2em] text-[var(--muted)]">AI +</p>
-                    <p className="mt-1 text-[10px] font-semibold tracking-[0.14em]">CONSTRUCTION</p>
-                  </div>
-                </div>
+              {/* AI Agents */}
+              <div className="group relative min-h-[300px] border-b border-r border-[var(--line)] p-8 transition-all duration-500 hover:bg-[var(--foreground)] hover:text-[var(--background)]">
+                <p className="text-xs tracking-[0.18em] opacity-60">
+                  02 / AI AGENTS
+                </p>
+
+                <h3 className="mt-10 text-3xl font-semibold tracking-[-0.04em]">
+                  AI Agents
+                </h3>
+
+                <p className="mt-4 max-w-sm text-sm leading-6 opacity-70">
+                  Exploring intelligent agents and automated workflows designed
+                  around construction-management processes.
+                </p>
+
+                <p className="absolute bottom-8 left-8 text-xs tracking-[0.16em]">
+                  EXPLORE →
+                </p>
               </div>
 
-              {/* Technical corner marks */}
-              <span className="pointer-events-none absolute left-4 top-4 h-5 w-5 border-l border-t border-[#b7975d]/60" />
-              <span className="pointer-events-none absolute right-4 top-4 h-5 w-5 border-r border-t border-[#b7975d]/60" />
-              <span className="pointer-events-none absolute bottom-4 left-4 h-5 w-5 border-b border-l border-[#b7975d]/60" />
-              <span className="pointer-events-none absolute bottom-4 right-4 h-5 w-5 border-b border-r border-[#b7975d]/60" />
-            </div>
+              {/* Case Studies */}
+              <div className="group relative min-h-[300px] border-b border-r border-[var(--line)] p-8 transition-all duration-500 hover:bg-[var(--foreground)] hover:text-[var(--background)]">
+                <p className="text-xs tracking-[0.18em] opacity-60">
+                  03 / CASE STUDIES
+                </p>
 
-            <div className="mt-6 flex flex-col gap-3 border-t border-[var(--line)] pt-5 text-[10px] tracking-[0.16em] text-[var(--muted)] sm:flex-row sm:items-center sm:justify-between">
-              <span>PROJECTS / AGENTS / CASE STUDIES / RESEARCH</span>
-              <span className="text-[var(--foreground)]">THIS SECTION IS BEING BUILT.</span>
+                <h3 className="mt-10 text-3xl font-semibold tracking-[-0.04em]">
+                  Case Studies
+                </h3>
+
+                <p className="mt-4 max-w-sm text-sm leading-6 opacity-70">
+                  Examining real construction problems and where technology can
+                  improve processes, decisions, and project outcomes.
+                </p>
+
+                <p className="absolute bottom-8 left-8 text-xs tracking-[0.16em]">
+                  EXPLORE →
+                </p>
+              </div>
+
+              {/* Research */}
+              <div className="group relative min-h-[300px] border-b border-r border-[var(--line)] p-8 transition-all duration-500 hover:bg-[var(--foreground)] hover:text-[var(--background)]">
+                <p className="text-xs tracking-[0.18em] opacity-60">
+                  04 / RESEARCH + WRITING
+                </p>
+
+                <h3 className="mt-10 text-3xl font-semibold tracking-[-0.04em]">
+                  Research &amp; Writing
+                </h3>
+
+                <p className="mt-4 max-w-sm text-sm leading-6 opacity-70">
+                  Research, article reviews, observations, and perspectives on
+                  AI, construction technology, and industry change.
+                </p>
+
+                <p className="absolute bottom-8 left-8 text-xs tracking-[0.16em]">
+                  EXPLORE →
+                </p>
+              </div>
+
             </div>
           </div>
         </div>

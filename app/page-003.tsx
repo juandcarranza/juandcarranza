@@ -1117,18 +1117,18 @@ onMouseLeave={() => setPortraitMode("professional")}
 )}
   </div>
 
-<div
-  className="mx-auto mt-4 flex items-end justify-between"
-  style={{
-    width:
-      amazonasImage === 2
-        ? "100%"
-        : amazonasImage === 0
-        ? "59%"
-        : "73.75%",
-  }}
->
-  <div className="text-left">
+<div className="mt-4 flex w-full items-end justify-between">
+  <div
+    className="text-left"
+    style={{
+  marginLeft:
+    amazonasImage === 2
+      ? "0"
+      : amazonasImage === 0
+      ? "20.5%"
+      : "13.125%",
+}}
+  >
     <p className="text-xs font-medium tracking-[0.18em] text-[var(--muted)]">
       {String(amazonasImage + 1).padStart(2, "0")} / 04
     </p>
@@ -1354,18 +1354,11 @@ onMouseLeave={() => setPortraitMode("professional")}
                           )}
                         </div>
 
-                        <div
-  className="mx-auto mt-4 flex items-end justify-between"
-  style={{
-    width:
-      walkerImage === 1
-        ? "81.25%"
-        : walkerImage === 3
-        ? "100%"
-        : "75%",
-  }}
->
-                          <div className="text-left">
+                        <div className="mt-4 flex w-full items-end justify-between">
+                          <div
+                            className="text-left"
+                            style={{ marginLeft: walkerImages[walkerImage].labelOffset }}
+                          >
                             <p className="text-xs font-medium tracking-[0.18em] text-[var(--muted)]">
                               {String(walkerImage + 1).padStart(2, "0")} / {String(walkerImages.length).padStart(2, "0")}
                             </p>
@@ -1455,10 +1448,10 @@ onMouseLeave={() => setPortraitMode("professional")}
         id="ai"
         className="relative overflow-hidden border-t border-[var(--line)] px-6 py-20 md:px-10 md:py-24 lg:px-16"
       >
-        {/* Background drafting grid */}
+        {/* Background detail */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.025]"
+          className="pointer-events-none absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage:
               "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
@@ -1467,6 +1460,7 @@ onMouseLeave={() => setPortraitMode("professional")}
         />
 
         <div className="relative z-10 grid gap-12 lg:grid-cols-12">
+
           {/* Section label */}
           <div className="lg:col-span-3">
             <p className="text-xs tracking-[0.2em] text-[var(--muted)]">
@@ -1474,23 +1468,16 @@ onMouseLeave={() => setPortraitMode("professional")}
             </p>
 
             <p className="mt-6 max-w-xs text-sm leading-6 text-[var(--muted)]">
-              An evolving space for projects, AI agents, case studies, research,
-              and ideas exploring technology across the built environment.
+              An evolving collection of projects, AI agents, case studies,
+              research, and ideas exploring technology across the built
+              environment.
             </p>
-
-            <div className="mt-10 hidden border-t border-[var(--line)] pt-5 lg:block">
-              <p className="text-[10px] tracking-[0.18em] text-[var(--muted)]">
-                STATUS / IN DEVELOPMENT
-              </p>
-              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
-                This section is being built.
-              </p>
-            </div>
           </div>
 
           {/* Main content */}
           <div className="lg:col-span-9">
-            <div className="mb-12">
+
+            <div className="mb-14">
               <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
                 EXPLORING WHAT&apos;S POSSIBLE
               </p>
@@ -1503,118 +1490,96 @@ onMouseLeave={() => setPortraitMode("professional")}
 
               <p className="mt-8 max-w-2xl text-lg leading-8 text-[var(--muted)]">
                 My interest in construction technology comes from a principle
-                I&apos;ve carried from the field: there&apos;s always a better way.
-                This space will document how I&apos;m exploring AI, automation, BIM,
-                and emerging technologies to improve how projects are planned,
-                coordinated, managed, and delivered.
+                I&apos;ve carried from the field: there&apos;s always a better
+                way. This space documents how I&apos;m exploring AI and
+                emerging technologies as tools to improve how projects are
+                planned, coordinated, managed, and delivered.
               </p>
             </div>
 
-            {/* Living network */}
-            <div className="relative min-h-[560px] overflow-hidden border border-[var(--line)] md:min-h-[620px]">
-              <video
-                className={`pointer-events-none absolute left-1/2 top-1/2 h-[106%] w-[106%] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover transition-all duration-700 ${
-                  theme === "dark"
-                    ? "opacity-75 brightness-[0.72] contrast-[1.08] saturate-[0.75]"
-                    : "opacity-20 brightness-[1.35] contrast-[0.75] grayscale"
-                }`}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                aria-hidden="true"
-              >
-                <source src="/videos/ai-network-dark.mp4" type="video/mp4" />
-              </video>
+            {/* Areas */}
+            <div className="grid border-l border-t border-[var(--line)] md:grid-cols-2">
 
-              {/* Theme/readability treatment */}
-              <div
-                aria-hidden="true"
-                className={`pointer-events-none absolute inset-0 ${
-                  theme === "dark"
-                    ? "bg-[var(--background)]/20"
-                    : "bg-[var(--background)]/65"
-                }`}
-              />
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0"
-                style={{
-                  background:
-                    theme === "dark"
-                      ? "radial-gradient(circle at center, transparent 0%, rgba(23,25,24,0.08) 42%, rgba(23,25,24,0.72) 100%)"
-                      : "radial-gradient(circle at center, rgba(241,239,233,0.18) 0%, rgba(241,239,233,0.62) 58%, rgba(241,239,233,0.94) 100%)",
-                }}
-              />
+              {/* Projects */}
+              <div className="group relative min-h-[300px] border-b border-r border-[var(--line)] p-8 transition-all duration-500 hover:bg-[var(--foreground)] hover:text-[var(--background)]">
+                <p className="text-xs tracking-[0.18em] opacity-60">
+                  01 / PROJECTS
+                </p>
 
-              {/* Real HTML labels over the generated network */}
-              <div className="relative z-10 grid min-h-[560px] grid-cols-2 grid-rows-2 md:min-h-[620px]">
-                {[
-                  {
-                    number: "01",
-                    title: "PROJECTS",
-                    description: "Academic + independent work",
-                    position: "items-start justify-start text-left",
-                  },
-                  {
-                    number: "02",
-                    title: "AI AGENTS",
-                    description: "Intelligent construction workflows",
-                    position: "items-start justify-end text-right",
-                  },
-                  {
-                    number: "03",
-                    title: "CASE STUDIES",
-                    description: "Problems, processes + better solutions",
-                    position: "items-end justify-start text-left",
-                  },
-                  {
-                    number: "04",
-                    title: "RESEARCH + WRITING",
-                    description: "Ideas, observations + industry change",
-                    position: "items-end justify-end text-right",
-                  },
-                ].map((area) => (
-                  <div
-                    key={area.number}
-                    className={`flex p-6 md:p-8 ${area.position}`}
-                  >
-                    <div className="max-w-[250px] bg-[var(--background)]/70 p-4 backdrop-blur-[2px] md:p-5">
-                      <p className="text-[10px] tracking-[0.2em] text-[var(--muted)]">
-                        {area.number} / IN DEVELOPMENT
-                      </p>
-                      <h3 className="mt-3 text-xl font-semibold tracking-[0.04em] md:text-2xl">
-                        {area.title}
-                      </h3>
-                      <p className="mt-2 text-xs leading-5 text-[var(--muted)]">
-                        {area.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                <h3 className="mt-10 text-3xl font-semibold tracking-[-0.04em]">
+                  Projects
+                </h3>
+
+                <p className="mt-4 max-w-sm text-sm leading-6 opacity-70">
+                  Academic and independent work exploring construction,
+                  management, technology, AI, BIM, and related topics.
+                </p>
+
+                <p className="absolute bottom-8 left-8 text-xs tracking-[0.16em]">
+                  EXPLORE →
+                </p>
               </div>
 
-              {/* Center marker */}
-              <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2">
-                <div className="flex h-20 w-20 items-center justify-center rounded-full border border-[#b7975d]/60 bg-[var(--background)]/75 backdrop-blur-sm md:h-24 md:w-24">
-                  <div className="text-center">
-                    <p className="text-[9px] tracking-[0.2em] text-[var(--muted)]">AI +</p>
-                    <p className="mt-1 text-[10px] font-semibold tracking-[0.14em]">CONSTRUCTION</p>
-                  </div>
-                </div>
+              {/* AI Agents */}
+              <div className="group relative min-h-[300px] border-b border-r border-[var(--line)] p-8 transition-all duration-500 hover:bg-[var(--foreground)] hover:text-[var(--background)]">
+                <p className="text-xs tracking-[0.18em] opacity-60">
+                  02 / AI AGENTS
+                </p>
+
+                <h3 className="mt-10 text-3xl font-semibold tracking-[-0.04em]">
+                  AI Agents
+                </h3>
+
+                <p className="mt-4 max-w-sm text-sm leading-6 opacity-70">
+                  Exploring intelligent agents and automated workflows designed
+                  around construction-management processes.
+                </p>
+
+                <p className="absolute bottom-8 left-8 text-xs tracking-[0.16em]">
+                  EXPLORE →
+                </p>
               </div>
 
-              {/* Technical corner marks */}
-              <span className="pointer-events-none absolute left-4 top-4 h-5 w-5 border-l border-t border-[#b7975d]/60" />
-              <span className="pointer-events-none absolute right-4 top-4 h-5 w-5 border-r border-t border-[#b7975d]/60" />
-              <span className="pointer-events-none absolute bottom-4 left-4 h-5 w-5 border-b border-l border-[#b7975d]/60" />
-              <span className="pointer-events-none absolute bottom-4 right-4 h-5 w-5 border-b border-r border-[#b7975d]/60" />
-            </div>
+              {/* Case Studies */}
+              <div className="group relative min-h-[300px] border-b border-r border-[var(--line)] p-8 transition-all duration-500 hover:bg-[var(--foreground)] hover:text-[var(--background)]">
+                <p className="text-xs tracking-[0.18em] opacity-60">
+                  03 / CASE STUDIES
+                </p>
 
-            <div className="mt-6 flex flex-col gap-3 border-t border-[var(--line)] pt-5 text-[10px] tracking-[0.16em] text-[var(--muted)] sm:flex-row sm:items-center sm:justify-between">
-              <span>PROJECTS / AGENTS / CASE STUDIES / RESEARCH</span>
-              <span className="text-[var(--foreground)]">THIS SECTION IS BEING BUILT.</span>
+                <h3 className="mt-10 text-3xl font-semibold tracking-[-0.04em]">
+                  Case Studies
+                </h3>
+
+                <p className="mt-4 max-w-sm text-sm leading-6 opacity-70">
+                  Examining real construction problems and where technology can
+                  improve processes, decisions, and project outcomes.
+                </p>
+
+                <p className="absolute bottom-8 left-8 text-xs tracking-[0.16em]">
+                  EXPLORE →
+                </p>
+              </div>
+
+              {/* Research */}
+              <div className="group relative min-h-[300px] border-b border-r border-[var(--line)] p-8 transition-all duration-500 hover:bg-[var(--foreground)] hover:text-[var(--background)]">
+                <p className="text-xs tracking-[0.18em] opacity-60">
+                  04 / RESEARCH + WRITING
+                </p>
+
+                <h3 className="mt-10 text-3xl font-semibold tracking-[-0.04em]">
+                  Research &amp; Writing
+                </h3>
+
+                <p className="mt-4 max-w-sm text-sm leading-6 opacity-70">
+                  Research, article reviews, observations, and perspectives on
+                  AI, construction technology, and industry change.
+                </p>
+
+                <p className="absolute bottom-8 left-8 text-xs tracking-[0.16em]">
+                  EXPLORE →
+                </p>
+              </div>
+
             </div>
           </div>
         </div>

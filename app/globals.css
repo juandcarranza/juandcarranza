@@ -35,14 +35,56 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
-@keyframes mdhReveal {
+@keyframes mdhFromRight {
   0% {
-    opacity: 0;
-    transform: scale(0.96);
+    opacity: 0.55;
+    transform: translateX(65%) scale(0.72);
+    filter: brightness(0.72);
   }
 
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: translateX(0) scale(1);
+    filter: brightness(1);
+  }
+}
+@keyframes mdhOutLeft {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: brightness(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-28%) scale(0.78);
+    filter: brightness(0.72);
+  }
+}
+
+@keyframes mdhOutRight {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: brightness(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(28%) scale(0.78);
+    filter: brightness(0.72);
+  }
+}
+@keyframes mdhFromLeft {
+  0% {
+    opacity: 0.55;
+    transform: translateX(-65%) scale(0.72);
+    filter: brightness(0.72);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: brightness(1);
   }
 }
