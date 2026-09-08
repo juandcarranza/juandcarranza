@@ -188,7 +188,7 @@ const walkerImages = [
     <main
   id="top"
   data-theme={theme}
-  className="min-h-screen bg-[var(--background)] text-[var(--foreground)] transition-colors duration-500"
+  className="min-h-screen overflow-x-hidden bg-[var(--background)] text-[var(--foreground)] transition-colors duration-500"
 >
       {/* Navigation */}
       <nav className="flex items-center justify-between border-b border-[var(--line)] bg-[var(--background)]/80 px-6 py-4 backdrop-blur-md md:px-10 md:py-5 lg:px-16">
@@ -199,7 +199,7 @@ const walkerImages = [
   JUAN D. CARRANZA
 </a>
 
-        <div className="hidden items-center gap-8 text-xs tracking-[0.12em] md:flex">
+        <div className="hidden items-center gap-4 text-[9px] tracking-[0.08em] md:flex lg:gap-6 lg:text-[10px] lg:tracking-[0.1em] xl:gap-8 xl:text-xs xl:tracking-[0.12em]">
           <a href="#about">ABOUT</a>
           <a href="#experience">EXPERIENCE</a>
           <a href="#projects">PROJECTS</a>
@@ -366,7 +366,7 @@ const walkerImages = [
             </p>
 
             {/* Mobile portrait + statement */}
-            <div className="mt-8 grid grid-cols-[0.78fr_1.22fr] items-center gap-5 md:hidden">
+            <div className="mt-8 grid grid-cols-[0.78fr_1.22fr] items-center gap-5 lg:hidden">
               <button
                 type="button"
                 onClick={() => setPortraitMode((mode) => mode === "professional" ? "field" : "professional")}
@@ -384,7 +384,7 @@ const walkerImages = [
                   className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-700 ${portraitMode === "field" ? "opacity-100" : "opacity-0"}`}
                 />
               </button>
-              <h2 className="text-[1.8rem] font-semibold leading-[0.98] tracking-[-0.045em]">
+              <h2 className="text-[1.8rem] font-semibold leading-[0.98] tracking-[-0.045em] md:text-[2.7rem]">
                 BUILT THROUGH
                 <br />
                 EXPERIENCE.
@@ -396,7 +396,11 @@ const walkerImages = [
             <div
   onMouseEnter={() => setPortraitMode("field")}
 onMouseLeave={() => setPortraitMode("professional")}
-  className="relative mt-10 hidden aspect-[4/5] overflow-hidden lg:block"
+onClick={() => setPortraitMode((mode) => mode === "professional" ? "field" : "professional")}
+  role="button"
+  tabIndex={0}
+  aria-label="Switch About portrait"
+  className="relative mt-10 hidden aspect-[4/5] cursor-pointer overflow-hidden lg:block"
 >
   <img
     src="/images/about/about-professional.jpeg"
@@ -421,7 +425,7 @@ onMouseLeave={() => setPortraitMode("professional")}
 
           {/* Main story */}
           <div className="lg:col-span-9">
-            <h2 className="hidden max-w-5xl text-4xl font-semibold leading-[1.05] tracking-[-0.04em] md:block md:text-6xl lg:text-7xl">
+            <h2 className="hidden max-w-5xl text-4xl font-semibold leading-[1.05] tracking-[-0.04em] lg:block lg:text-7xl">
               BUILT THROUGH
               <br />
               EXPERIENCE.
@@ -504,12 +508,12 @@ onMouseLeave={() => setPortraitMode("professional")}
               <div className="grid border-l border-t border-[var(--line)] md:grid-cols-3">
 
                 {/* Construction */}
-                <div className="group relative min-h-[280px] overflow-hidden border-b border-r border-[var(--line)] p-6 transition-all duration-500 hover:bg-[var(--foreground)] hover:text-[var(--background)]">
+                <div className="group relative min-w-0 min-h-[280px] overflow-hidden border-b border-r border-[var(--line)] p-5 transition-all duration-500 hover:bg-[var(--foreground)] hover:text-[var(--background)] lg:p-6">
                   <p className="text-xs tracking-[0.18em] opacity-60">
                     01
                   </p>
 
-                  <h3 className="mt-8 text-2xl font-semibold tracking-[-0.03em]">
+                  <h3 className="mt-8 whitespace-nowrap text-lg font-semibold tracking-[-0.03em] lg:text-xl xl:text-2xl">
                     CONSTRUCTION
                   </h3>
 
@@ -528,12 +532,12 @@ onMouseLeave={() => setPortraitMode("professional")}
                 </div>
 
                 {/* Management */}
-                <div className="group relative min-h-[280px] overflow-hidden border-b border-r border-[var(--line)] p-6 transition-all duration-500 hover:bg-[var(--foreground)] hover:text-[var(--background)]">
+                <div className="group relative min-w-0 min-h-[280px] overflow-hidden border-b border-r border-[var(--line)] p-5 transition-all duration-500 hover:bg-[var(--foreground)] hover:text-[var(--background)] lg:p-6">
                   <p className="text-xs tracking-[0.18em] opacity-60">
                     02
                   </p>
 
-                  <h3 className="mt-8 text-2xl font-semibold tracking-[-0.03em]">
+                  <h3 className="mt-8 break-words text-xl font-semibold tracking-[-0.03em] lg:text-2xl">
                     MANAGEMENT
                   </h3>
 
@@ -552,12 +556,12 @@ onMouseLeave={() => setPortraitMode("professional")}
                 </div>
 
                 {/* Technology */}
-                <div className="group relative min-h-[280px] overflow-hidden border-b border-r border-[var(--line)] p-6 transition-all duration-500 hover:bg-[var(--foreground)] hover:text-[var(--background)]">
+                <div className="group relative min-w-0 min-h-[280px] overflow-hidden border-b border-r border-[var(--line)] p-5 transition-all duration-500 hover:bg-[var(--foreground)] hover:text-[var(--background)] lg:p-6">
                   <p className="text-xs tracking-[0.18em] opacity-60">
                     03
                   </p>
 
-                  <h3 className="mt-8 text-2xl font-semibold tracking-[-0.03em]">
+                  <h3 className="mt-8 break-words text-xl font-semibold tracking-[-0.03em] lg:text-2xl">
                     TECHNOLOGY
                   </h3>
 
@@ -666,7 +670,7 @@ onMouseLeave={() => setPortraitMode("professional")}
             </div>
 
             {/* ICE Electronics */}
-            <article className="grid gap-8 border-t border-[var(--line)] py-10 md:grid-cols-[1fr_2fr]">
+            <article className="grid gap-8 border-t border-[var(--line)] py-10 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
               <div>
                 <p className="text-xs tracking-[0.16em] text-[var(--muted)]">
                   MAY 2026 — PRESENT
@@ -709,7 +713,7 @@ onMouseLeave={() => setPortraitMode("professional")}
 
             {/* RI Group */}
             <article className="border-y border-[var(--line)] py-10">
-              <div className="grid gap-8 md:grid-cols-[1fr_2fr]">
+              <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
 
                 <div>
                   <p className="text-xs tracking-[0.16em] text-[var(--muted)]">
@@ -838,7 +842,7 @@ onMouseLeave={() => setPortraitMode("professional")}
 
             {/* Mini Design House */}
             <article className="group border-t border-[var(--line)] py-9 md:py-12">
-              <div className="grid gap-10 md:grid-cols-[1fr_2fr]">
+              <div className="grid gap-10 md:grid-cols-[minmax(250px,1fr)_minmax(0,1.45fr)] lg:grid-cols-[minmax(280px,1fr)_minmax(0,1.5fr)] xl:grid-cols-[1fr_2fr]">
 
                 <div>
   <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
@@ -849,20 +853,20 @@ onMouseLeave={() => setPortraitMode("professional")}
     PANAMA CITY, PANAMA
   </p>
 
-  <div className="mt-7 flex items-start justify-between gap-4 md:hidden">
-    <h3 className="text-[1.85rem] font-semibold leading-tight tracking-[-0.04em]">
+  <div className="mt-7 flex items-start justify-between gap-4 lg:hidden">
+    <h3 className="text-[1.85rem] font-semibold leading-tight tracking-[-0.04em] md:text-[2.1rem] xl:text-[1.85rem]">
       PH MINI DESIGN HOUSE 57
     </h3>
     <span className="shrink-0 text-2xl">↗</span>
   </div>
 
-  <p className="mt-7 max-w-xs text-sm leading-7 text-[var(--muted)] md:mt-8">
+  <p className="mt-7 max-w-xs text-sm leading-7 text-[var(--muted)] md:mt-8 md:max-w-none xl:max-w-xs">
     Helped lead the completion and handover of a 20-story residential
     project after the original contractor exited the project, working
     under a limited closeout budget and tight delivery schedule.
   </p>
 
-  <div className="mt-10 max-w-xs space-y-6 border-t border-[var(--line)] pt-6">
+  <div className="mt-10 max-w-xs space-y-6 border-t border-[var(--line)] pt-6 md:max-w-none xl:max-w-xs">
     <div>
       <p className="text-sm font-semibold tracking-[0.16em] text-[var(--foreground)]">
         SCALE
@@ -893,8 +897,8 @@ onMouseLeave={() => setPortraitMode("professional")}
 </div>
 
 <div>
- <div className="hidden items-start justify-between md:flex md:-mx-8 xl:-mx-24">
-  <h3 className="text-[1.85rem] font-semibold leading-tight tracking-[-0.04em] md:translate-x-4 md:whitespace-nowrap md:text-5xl xl:translate-x-10">
+ <div className="hidden items-start justify-between xl:flex xl:-mx-24">
+  <h3 className="text-[1.85rem] font-semibold leading-tight tracking-[-0.04em] md:translate-x-4 md:text-[2.15rem] lg:text-[2.35rem] xl:translate-x-10 xl:whitespace-nowrap xl:text-5xl">
     PH MINI DESIGN HOUSE 57
   </h3>
 
@@ -904,7 +908,7 @@ onMouseLeave={() => setPortraitMode("professional")}
 </div>
 
 {/* MDH Gallery */}
-<div className="mt-7 md:hidden">
+<div className="mt-7 lg:hidden">
   <div className="flex w-full justify-center overflow-hidden">
     <img src={mdhImages[mdhImage].src} alt={`PH Mini Design House 57 — ${mdhImages[mdhImage].label}`} className="max-h-[62vh] w-full object-contain" />
   </div>
@@ -920,7 +924,7 @@ onMouseLeave={() => setPortraitMode("professional")}
   </div>
 </div>
 
-<div className="mt-10 hidden md:block">
+<div className="mt-10 hidden lg:block">
  <div className="relative grid grid-cols-[0.85fr_1.7fr_0.85fr] items-center xl:-mx-24">
 
     {/* Previous */}
@@ -975,7 +979,7 @@ onMouseLeave={() => setPortraitMode("professional")}
 
   {/* Active */}
 <div className="relative z-20 mx-auto w-fit">
-  <div className="relative h-[clamp(260px,42vw,590px)] overflow-hidden shadow-2xl">
+  <div className="relative h-[clamp(260px,30vw,420px)] 2xl:h-[clamp(260px,42vw,590px)] overflow-hidden shadow-2xl">
     <img
       key={mdhImage}
       src={mdhImages[mdhImage].src}
@@ -1080,7 +1084,7 @@ onMouseLeave={() => setPortraitMode("professional")}
 
             {/* Amazonas */}
             <article className="group border-t border-[var(--line)] py-9 md:py-12">
-              <div className="grid gap-10 md:grid-cols-[1fr_2fr]">
+              <div className="grid gap-10 md:grid-cols-[minmax(250px,1fr)_minmax(0,1.45fr)] lg:grid-cols-[minmax(280px,1fr)_minmax(0,1.5fr)] xl:grid-cols-[1fr_2fr]">
 
                 <div>
   <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
@@ -1091,20 +1095,20 @@ onMouseLeave={() => setPortraitMode("professional")}
     PANAMA CITY, PANAMA
   </p>
 
-  <div className="mt-7 flex items-start justify-between gap-4 md:hidden">
-    <h3 className="text-[1.85rem] font-semibold leading-tight tracking-[-0.04em]">
+  <div className="mt-7 flex items-start justify-between gap-4 lg:hidden">
+    <h3 className="text-[1.85rem] font-semibold leading-tight tracking-[-0.04em] md:text-[2.1rem] xl:text-[1.85rem]">
       PH AMAZONAS
     </h3>
     <span className="shrink-0 text-2xl">↗</span>
   </div>
 
-  <p className="mt-7 max-w-xs text-sm leading-7 text-[var(--muted)] md:mt-8">
+  <p className="mt-7 max-w-xs text-sm leading-7 text-[var(--muted)] md:mt-8 md:max-w-none xl:max-w-xs">
     Supported budgeting and project kickoff before supervising piling and
     foundation activities, including coordination of concrete, reinforcing
     steel, earthwork, and surrounding stakeholders.
   </p>
 
-  <div className="mt-10 max-w-xs space-y-6 border-t border-[var(--line)] pt-6">
+  <div className="mt-10 max-w-xs space-y-6 border-t border-[var(--line)] pt-6 md:max-w-none xl:max-w-xs">
     <div>
       <p className="text-sm font-semibold tracking-[0.16em] text-[var(--foreground)]">
         SCALE
@@ -1135,8 +1139,8 @@ onMouseLeave={() => setPortraitMode("professional")}
 </div>
 
 <div>
- <div className="hidden items-start justify-between md:flex md:-mx-8 xl:-mx-24">
-  <h3 className="text-[1.85rem] font-semibold leading-tight tracking-[-0.04em] md:translate-x-4 md:whitespace-nowrap md:text-5xl xl:translate-x-10">
+ <div className="hidden items-start justify-between xl:flex xl:-mx-24">
+  <h3 className="text-[1.85rem] font-semibold leading-tight tracking-[-0.04em] md:translate-x-4 md:text-[2.15rem] lg:text-[2.35rem] xl:translate-x-10 xl:whitespace-nowrap xl:text-5xl">
     PH AMAZONAS
   </h3>
 
@@ -1146,7 +1150,7 @@ onMouseLeave={() => setPortraitMode("professional")}
 </div>
 
 {/* Amazonas Gallery */}
-<div className="mt-7 md:hidden">
+<div className="mt-7 lg:hidden">
   <div className="flex w-full justify-center overflow-hidden">
     <img src={amazonasImages[amazonasImage].src} alt={`PH Amazonas — ${amazonasImages[amazonasImage].label}`} className="max-h-[62vh] w-full object-contain" />
   </div>
@@ -1162,7 +1166,7 @@ onMouseLeave={() => setPortraitMode("professional")}
   </div>
 </div>
 
-<div className="mt-10 hidden md:block">
+<div className="mt-10 hidden lg:block">
  <div className="relative grid grid-cols-[0.85fr_1.7fr_0.85fr] items-center xl:-mx-24">
 
     {/* Previous */}
@@ -1216,8 +1220,8 @@ onMouseLeave={() => setPortraitMode("professional")}
     </button>
 
   {/* Active */}
-<div className="relative z-20 mx-auto w-[clamp(300px,42vw,590px)]">
-  <div className="relative flex h-[clamp(260px,42vw,590px)] w-full items-center justify-center overflow-visible">
+<div className="relative z-20 mx-auto w-[clamp(280px,30vw,420px)] 2xl:w-[clamp(300px,42vw,590px)]">
+  <div className="relative flex h-[clamp(260px,30vw,420px)] 2xl:h-[clamp(260px,42vw,590px)] w-full items-center justify-center overflow-visible">
     <img
       key={amazonasImage}
       src={amazonasImages[amazonasImage].src}
@@ -1340,7 +1344,7 @@ onMouseLeave={() => setPortraitMode("professional")}
 
             {/* The Walker */}
             <article className="group border-y border-[var(--line)] py-9 md:py-12">
-              <div className="grid gap-10 md:grid-cols-[1fr_2fr]">
+              <div className="grid gap-10 md:grid-cols-[minmax(250px,1fr)_minmax(0,1.45fr)] lg:grid-cols-[minmax(280px,1fr)_minmax(0,1.5fr)] xl:grid-cols-[1fr_2fr]">
 
                 <div>
                   <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
@@ -1351,21 +1355,21 @@ onMouseLeave={() => setPortraitMode("professional")}
                     PANAMA CITY, PANAMA
                   </p>
 
-                  <div className="mt-7 flex items-start justify-between gap-4 md:hidden">
-                    <h3 className="text-[1.85rem] font-semibold leading-tight tracking-[-0.04em]">
+                  <div className="mt-7 flex items-start justify-between gap-4 lg:hidden">
+                    <h3 className="text-[1.85rem] font-semibold leading-tight tracking-[-0.04em] md:text-[2.1rem] xl:text-[1.85rem]">
                       PH THE WALKER
                     </h3>
                     <span className="shrink-0 text-2xl">↗</span>
                   </div>
 
-                  <p className="mt-7 max-w-xs text-sm leading-7 text-[var(--muted)] md:mt-8">
+                  <p className="mt-7 max-w-xs text-sm leading-7 text-[var(--muted)] md:mt-8 md:max-w-none xl:max-w-xs">
                     Progressed from preconstruction and field supervision into
                     production leadership, coordinating structural activities,
                     procurement, schedules, field resources, and a workforce of
                     more than 60 personnel.
                   </p>
 
-                  <div className="mt-10 max-w-xs space-y-6 border-t border-[var(--line)] pt-6">
+                  <div className="mt-10 max-w-xs space-y-6 border-t border-[var(--line)] pt-6 md:max-w-none xl:max-w-xs">
                     <div>
                       <p className="text-sm font-semibold tracking-[0.16em] text-[var(--foreground)]">
                         SCALE
@@ -1396,8 +1400,8 @@ onMouseLeave={() => setPortraitMode("professional")}
                 </div>
 
                 <div>
-                  <div className="hidden items-start justify-between md:flex md:-mx-8 xl:-mx-24">
-                    <h3 className="text-[1.85rem] font-semibold leading-tight tracking-[-0.04em] md:translate-x-4 md:whitespace-nowrap md:text-5xl xl:translate-x-10">
+                  <div className="hidden items-start justify-between xl:flex xl:-mx-24">
+                    <h3 className="text-[1.85rem] font-semibold leading-tight tracking-[-0.04em] md:translate-x-4 md:text-[2.15rem] lg:text-[2.35rem] xl:translate-x-10 xl:whitespace-nowrap xl:text-5xl">
                       PH THE WALKER
                     </h3>
 
@@ -1407,7 +1411,7 @@ onMouseLeave={() => setPortraitMode("professional")}
                   </div>
 
                   {/* Walker Gallery */}
-<div className="mt-7 md:hidden">
+<div className="mt-7 lg:hidden">
   <div className="flex w-full justify-center overflow-hidden">
     <img src={walkerImages[walkerImage].src} alt={`PH The Walker — ${walkerImages[walkerImage].label}`} className="max-h-[62vh] w-full object-contain" />
   </div>
@@ -1423,7 +1427,7 @@ onMouseLeave={() => setPortraitMode("professional")}
   </div>
 </div>
 
-                  <div className="mt-10 hidden md:block">
+                  <div className="mt-10 hidden lg:block">
                     <div className="relative grid grid-cols-[0.85fr_1.7fr_0.85fr] items-center xl:-mx-24">
 
                       {/* Previous */}
@@ -1475,8 +1479,8 @@ onMouseLeave={() => setPortraitMode("professional")}
                       </button>
 
                       {/* Active */}
-                      <div className="relative z-20 mx-auto w-[clamp(300px,42vw,590px)]">
-                        <div className="relative flex h-[clamp(260px,42vw,590px)] w-full items-center justify-center overflow-visible">
+                      <div className="relative z-20 mx-auto w-[clamp(280px,30vw,420px)] 2xl:w-[clamp(300px,42vw,590px)]">
+                        <div className="relative flex h-[clamp(260px,30vw,420px)] 2xl:h-[clamp(260px,42vw,590px)] w-full items-center justify-center overflow-visible">
                           <img
                             key={walkerImage}
                             src={walkerImages[walkerImage].src}
@@ -1802,7 +1806,7 @@ WHAT&apos;S NEXT.
     <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
       EMAIL / PRIMARY
     </p>
-    <p className="mt-2 text-xl md:text-2xl">
+    <p className="mt-2 break-all text-xl md:text-2xl">
       juandacarranza@gmail.com
     </p>
   </div>
@@ -1819,7 +1823,7 @@ WHAT&apos;S NEXT.
     <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
       EMAIL / ASU
     </p>
-    <p className="mt-2 text-xl md:text-2xl">
+    <p className="mt-2 break-all text-xl md:text-2xl">
       jcarra47@asu.edu
     </p>
   </div>
@@ -1839,7 +1843,7 @@ WHAT&apos;S NEXT.
                   <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
                     LINKEDIN
                   </p>
-                  <p className="mt-2 text-xl md:text-2xl">
+                  <p className="mt-2 break-all text-xl md:text-2xl">
                     linkedin.com/in/jdca3011
                   </p>
                 </div>
@@ -1859,7 +1863,7 @@ WHAT&apos;S NEXT.
                   <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
                     RÉSUMÉ
                   </p>
-                  <p className="mt-2 text-xl md:text-2xl">
+                  <p className="mt-2 break-all text-xl md:text-2xl">
                     View résumé
                   </p>
                 </div>
