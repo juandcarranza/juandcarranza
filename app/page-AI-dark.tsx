@@ -19,7 +19,6 @@ const [walkerImage, setWalkerImage] = useState(0);
 const [walkerDirection, setWalkerDirection] = useState<"left" | "right">("right");
 const [walkerPreviousImage, setWalkerPreviousImage] = useState<number | null>(null);
 const [walkerManualPause, setWalkerManualPause] = useState(false);
-const [experienceVisible, setExperienceVisible] = useState(false);
 useEffect(() => {
   if (mdhManualPause) return;
 
@@ -171,19 +170,6 @@ const walkerImages = [
       setTheme(savedTheme);
     }
   }, []);
-  useEffect(() => {
-    const section = document.getElementById("experience");
-    if (!section) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setExperienceVisible(entry.isIntersecting),
-      { threshold: 0.3 }
-    );
-
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <main
   id="top"
@@ -191,7 +177,7 @@ const walkerImages = [
   className="min-h-screen bg-[var(--background)] text-[var(--foreground)] transition-colors duration-500"
 >
       {/* Navigation */}
-      <nav className="flex items-center justify-between border-b border-[var(--line)] bg-[var(--background)]/80 px-6 py-4 backdrop-blur-md md:px-10 md:py-5 lg:px-16">
+      <nav className="flex items-center justify-between border-b border-[var(--line)] bg-[var(--background)]/80 px-6 py-5 backdrop-blur-md md:px-10 lg:px-16">
        <a
   href="#"
   className="text-lg font-semibold tracking-[-0.02em] md:text-xl"
@@ -241,7 +227,7 @@ const walkerImages = [
       </nav>
 
                        {/* Hero */}
-      <section className="relative min-h-[calc(100svh-69px)] overflow-hidden border-b border-[var(--line)] md:min-h-[calc(100vh-80px)]">
+      <section className="relative min-h-[calc(100vh-80px)] overflow-hidden border-b border-[var(--line)]">
 
         {/* Full-background image */}
         <img
@@ -272,13 +258,22 @@ const walkerImages = [
   }}
 />
         {/* Hero content */}
-        <div className="relative z-10 flex min-h-[calc(100svh-69px)] flex-col px-6 py-5 text-[var(--foreground)] md:min-h-[calc(100vh-80px)] md:px-10 md:py-10 lg:px-16">
+        <div className="relative z-10 flex min-h-[calc(100vh-80px)] flex-col px-6 py-8 text-[var(--foreground)] md:px-10 md:py-10 lg:px-16">
 
-       
+          {/* Top metadata */}
+          <div className="flex items-center justify-between">
+            <p className="text-[10px] tracking-[0.2em] text-[#b4b5b1]">
+              CIVIL ENGINEER / ASU
+            </p>
+
+            <p className="text-[10px] tracking-[0.2em] text-[#b4b5b1]">
+              PANAMA / USA
+            </p>
+          </div>
 
           {/* Main statement */}
-          <div className="pb-8 pt-8 md:my-auto md:py-12">
-            <h1 className="max-w-5xl text-[2.85rem] font-semibold leading-[0.86] tracking-[-0.055em] sm:text-[3.15rem] md:text-[clamp(3.3rem,7.2vw,8rem)] md:leading-[0.82] md:tracking-[-0.065em]">
+          <div className="my-auto py-12">
+            <h1 className="max-w-5xl text-[clamp(3.3rem,7.2vw,8rem)] font-semibold leading-[0.82] tracking-[-0.065em]">
               <span className="block">CONSTRUCTION.</span>
               <span className="block">MANAGEMENT.</span>
               <span className="block">TECHNOLOGY.</span>
@@ -286,31 +281,23 @@ const walkerImages = [
 
             {/* Better Together */}
             <div className="mt-8 border-l-2 border-[#b7975d] pl-5 md:mt-10">
-              <p
-                className={`text-sm tracking-[0.05em] sm:text-base md:text-lg ${
-                  theme === "dark" ? "text-[#b4b5b1]" : "text-[#777a76]"
-                }`}
-              >
+              <p className="text-base tracking-[0.05em] text-[#b4b5b1] md:text-lg">
                 GREAT ON THEIR OWN.
               </p>
 
-              <p className="mt-1 text-[1.7rem] font-semibold tracking-[-0.04em] sm:text-3xl md:text-4xl">
+              <p className="mt-1 text-3xl font-semibold tracking-[-0.04em] md:text-4xl">
                 BETTER TOGETHER.
               </p>
             </div>
 
             {/* Intro */}
-            <p
-              className={`mt-7 max-w-md text-sm leading-6 ${
-                theme === "dark" ? "text-[#d2d3cf] md:text-[#b4b5b1]" : "text-[#555955] md:text-[#777a76]"
-              }`}
-            >
-              Civil Engineer pursuing an M.S. in Construction Management and
-              Technology at Arizona State University.
+            <p className="mt-8 max-w-md text-sm leading-6 text-[#b4b5b1]">
+              Civil Engineer &amp; M.S. Construction Management and Technology
+              Student at Arizona State University.
             </p>
 
             {/* Actions */}
-            <div className="mt-7 flex flex-wrap gap-3 md:mt-8">
+            <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#projects"
                 className="border border-[#b7975d] bg-[#b7975d] px-5 py-3 text-[10px] font-semibold tracking-[0.16em] text-[#171918] transition-opacity hover:opacity-80"
@@ -328,15 +315,18 @@ const walkerImages = [
           </div>
 
           {/* Bottom */}
-          <div className="flex items-end">
+          <div className="flex items-end justify-between">
             <a
               href="#about"
-              className={`text-[9px] tracking-[0.2em] ${
-                theme === "dark" ? "text-[#b4b5b1]" : "text-[#777a76]"
-              }`}
+              className="text-[9px] tracking-[0.2em] text-[#b4b5b1]"
             >
               SCROLL ↓
             </a>
+
+            <div className="text-right text-[9px] tracking-[0.18em] text-[#b4b5b1]">
+              <p>CONSTRUCTION / MANAGEMENT</p>
+              <p className="mt-1">TECHNOLOGY / 2026</p>
+            </div>
           </div>
 
         </div>
@@ -344,7 +334,7 @@ const walkerImages = [
                   {/* About */}
       <section
         id="about"
-        className="relative overflow-hidden border-t border-[var(--line)] px-6 py-14 md:px-10 md:py-24 lg:px-16"
+        className="relative overflow-hidden border-t border-[var(--line)] px-6 py-20 md:px-10 md:py-24 lg:px-16"
       >
         {/* Subtle background detail */}
         <div
@@ -364,34 +354,6 @@ const walkerImages = [
             <p className="text-xs tracking-[0.2em] text-[var(--muted)]">
               01 / ABOUT
             </p>
-
-            {/* Mobile portrait + statement */}
-            <div className="mt-8 grid grid-cols-[0.78fr_1.22fr] items-center gap-5 md:hidden">
-              <button
-                type="button"
-                onClick={() => setPortraitMode((mode) => mode === "professional" ? "field" : "professional")}
-                aria-label="Switch About portrait"
-                className="relative aspect-[4/5] overflow-hidden text-left"
-              >
-                <img
-                  src="/images/about/about-professional.jpeg"
-                  alt="Juan D. Carranza"
-                  className={`absolute inset-0 h-full w-full object-cover object-center transition-all duration-700 ${portraitMode === "professional" ? "opacity-100" : "opacity-0"} ${theme === "dark" ? "brightness-[0.82] saturate-[0.65] contrast-[1.05]" : "brightness-[0.98] saturate-[0.9]"}`}
-                />
-                <img
-                  src="/images/about/about-field.jpg"
-                  alt="Juan D. Carranza on a construction site in Panama City"
-                  className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-700 ${portraitMode === "field" ? "opacity-100" : "opacity-0"}`}
-                />
-              </button>
-              <h2 className="text-[1.8rem] font-semibold leading-[0.98] tracking-[-0.045em]">
-                BUILT THROUGH
-                <br />
-                EXPERIENCE.
-                <br />
-                DRIVEN BY WHAT&apos;S NEXT.
-              </h2>
-            </div>
 
             <div
   onMouseEnter={() => setPortraitMode("field")}
@@ -421,7 +383,7 @@ onMouseLeave={() => setPortraitMode("professional")}
 
           {/* Main story */}
           <div className="lg:col-span-9">
-            <h2 className="hidden max-w-5xl text-4xl font-semibold leading-[1.05] tracking-[-0.04em] md:block md:text-6xl lg:text-7xl">
+            <h2 className="max-w-5xl text-4xl font-semibold leading-[1.05] tracking-[-0.04em] md:text-6xl lg:text-7xl">
               BUILT THROUGH
               <br />
               EXPERIENCE.
@@ -430,27 +392,11 @@ onMouseLeave={() => setPortraitMode("professional")}
             </h2>
 
             {/* Panama / USA story */}
-            <div className="mt-5 grid gap-8 border-t border-[var(--line)] pt-7 md:mt-10 md:grid-cols-2">
+            <div className="mt-10 grid gap-8 border-t border-[var(--line)] pt-7 md:grid-cols-2">
               <div>
-                <div className="min-h-[58px]">
                 <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
-                  <span className="inline-flex items-center gap-2">
-                    <svg viewBox="0 0 24 16" className="h-[11px] w-4 shrink-0" aria-hidden="true">
-                      <rect width="12" height="8" x="0" y="0" fill="#ffffff" />
-                      <rect width="12" height="8" x="12" y="0" fill="#d21034" />
-                      <rect width="12" height="8" x="0" y="8" fill="#005293" />
-                      <rect width="12" height="8" x="12" y="8" fill="#ffffff" />
-                      <text x="6" y="6" textAnchor="middle" fontSize="5" fill="#005293">★</text>
-                      <text x="18" y="14" textAnchor="middle" fontSize="5" fill="#d21034">★</text>
-                    </svg>
-                    <span>PANAMA</span>
-                  </span>
+                  PANAMA
                 </p>
-
-                <p className="mt-2 text-[10px] tracking-[0.16em] text-[var(--muted)]">
-                  🏠 PANAMA CITY
-                </p>
-                </div>
 
                 <p className="mt-4 max-w-md text-base leading-7">
                   My path in construction began with Civil Engineering and
@@ -461,29 +407,9 @@ onMouseLeave={() => setPortraitMode("professional")}
               </div>
 
               <div>
-                <div className="min-h-[58px]">
                 <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
-                  <span className="inline-flex items-center gap-2">
-                    <svg viewBox="0 0 26 16" className="h-[11px] w-[18px] shrink-0" aria-hidden="true">
-                      <rect width="26" height="16" fill="#ffffff" />
-                      {[0, 2, 4, 6, 8, 10, 12].map((stripe) => (
-                        <rect key={stripe} x="0" y={stripe * (16 / 13)} width="26" height={16 / 13} fill="#b22234" />
-                      ))}
-                      <rect width="10.4" height="8.6" fill="#3c3b6e" />
-                      <g fill="#ffffff">
-                        <circle cx="2" cy="2" r="0.45" /><circle cx="4" cy="2" r="0.45" /><circle cx="6" cy="2" r="0.45" /><circle cx="8" cy="2" r="0.45" />
-                        <circle cx="3" cy="4" r="0.45" /><circle cx="5" cy="4" r="0.45" /><circle cx="7" cy="4" r="0.45" />
-                        <circle cx="2" cy="6" r="0.45" /><circle cx="4" cy="6" r="0.45" /><circle cx="6" cy="6" r="0.45" /><circle cx="8" cy="6" r="0.45" />
-                      </g>
-                    </svg>
-                    <span>UNITED STATES</span>
-                  </span>
+                  UNITED STATES
                 </p>
-
-                <p className="mt-2 text-[10px] tracking-[0.16em] text-[var(--muted)]">
-                  📍 TEMPE, ARIZONA
-                </p>
-                </div>
 
                 <p className="mt-4 max-w-md text-base leading-7">
                   Today, I&apos;m pursuing an M.S. in Construction Management
@@ -583,7 +509,7 @@ onMouseLeave={() => setPortraitMode("professional")}
                  {/* Experience */}
       <section
         id="experience"
-        className="relative overflow-hidden border-t border-[var(--line)] px-6 py-14 md:px-10 md:py-24 lg:px-16"
+        className="relative overflow-hidden border-t border-[var(--line)] px-6 py-20 md:px-10 md:py-24 lg:px-16"
       >
         <div className="grid gap-12 lg:grid-cols-12">
 
@@ -598,55 +524,48 @@ onMouseLeave={() => setPortraitMode("professional")}
               increasing responsibility.
             </p>
 
-            <div className="relative mt-14 hidden pl-9 lg:block">
-              {/* Base line and animated career tracer share the exact node centerline */}
-              <div className="absolute bottom-1 left-[5px] top-2 w-px bg-[var(--line)]" />
-              <div
-                aria-hidden="true"
-                className="absolute left-[4px] top-2 w-[3px] origin-top bg-[#b7975d] transition-transform duration-[2500ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
-                style={{
-                  height: "calc(100% - 10px)",
-                  transform: experienceVisible ? "scaleY(1)" : "scaleY(0)",
-                }}
-              />
+            <div className="relative mt-12 hidden pl-6 lg:block">
+              <div className="absolute bottom-0 left-[4px] top-2 w-px bg-[var(--line)]" />
 
-              {[
-                { year: "2018", role: "First field experience", detail: "", delay: 100, current: false },
-                { year: "2019", role: "Civil Engineering degree begins", detail: "", delay: 500, current: false },
-                { year: "2024", role: "Works Supervisor + Assistant PM", detail: "", delay: 900, current: false },
-                { year: "2025", role: "Licensed Civil Engineer", detail: "PANAMA", delay: 1300, current: false },
-                { year: "2026", role: "Production Lead", detail: "", delay: 1700, current: false },
-                { year: "NOW", role: "Project Manager", detail: "", delay: 2100, current: true },
-              ].map((step, index) => (
-                <div
-                  key={step.year}
-                  className={`group relative ${index < 5 ? "pb-20" : ""} transition-all duration-700`}
-                  style={{
-                    opacity: experienceVisible ? 1 : 0.25,
-                    transform: experienceVisible ? "translateX(0)" : "translateX(-8px)",
-                    transitionDelay: experienceVisible ? `${step.delay}ms` : "0ms",
-                  }}
-                >
-                  <span
-                    className={`absolute -left-[36.5px] top-0.5 h-3 w-3 rounded-full border transition-all duration-500 group-hover:scale-125 ${
-                      step.current
-                        ? "border-[#b7975d] bg-[#b7975d] shadow-[0_0_0_5px_rgba(183,151,93,0.12)]"
-                        : "border-[var(--foreground)] bg-[var(--background)]"
-                    }`}
-                  />
-                  <p className={`text-[11px] tracking-[0.2em] ${step.current ? "text-[#b7975d]" : "text-[var(--muted)]"}`}>
-                    {step.year}
-                  </p>
-                  <p className="mt-2 max-w-[230px] text-[17px] font-medium leading-6 tracking-[-0.02em] transition-transform duration-300 group-hover:translate-x-1">
-                    {step.role}
-                  </p>
-                  {step.detail && (
-                    <p className="mt-1 text-[10px] tracking-[0.18em] text-[var(--muted)]">
-                      {step.detail}
-                    </p>
-                  )}
-                </div>
-              ))}
+              <div className="relative pb-12">
+                <span className="absolute -left-6 top-1 h-[9px] w-[9px] rounded-full bg-[var(--muted)]" />
+                <p className="text-[10px] tracking-[0.16em] text-[var(--muted)]">
+                  2017
+                </p>
+                <p className="mt-2 text-sm">
+                  First field experience
+                </p>
+              </div>
+
+              <div className="relative pb-12">
+                <span className="absolute -left-6 top-1 h-[9px] w-[9px] rounded-full bg-[var(--muted)]" />
+                <p className="text-[10px] tracking-[0.16em] text-[var(--muted)]">
+                  2024
+                </p>
+                <p className="mt-2 text-sm">
+                  Works Supervisor
+                </p>
+              </div>
+
+              <div className="relative pb-12">
+                <span className="absolute -left-6 top-1 h-[9px] w-[9px] rounded-full bg-[var(--foreground)]" />
+                <p className="text-[10px] tracking-[0.16em] text-[var(--muted)]">
+                  2026
+                </p>
+                <p className="mt-2 text-sm">
+                  Production Lead
+                </p>
+              </div>
+
+              <div className="relative">
+                <span className="absolute -left-6 top-1 h-[9px] w-[9px] rounded-full bg-[var(--foreground)]" />
+                <p className="text-[10px] tracking-[0.16em] text-[var(--muted)]">
+                  NOW
+                </p>
+                <p className="mt-2 text-sm">
+                  Project Manager
+                </p>
+              </div>
             </div>
           </div>
 
@@ -658,7 +577,7 @@ onMouseLeave={() => setPortraitMode("professional")}
                 PROFESSIONAL JOURNEY
               </p>
 
-              <h2 className="mt-5 max-w-4xl text-[2.15rem] font-semibold leading-[1.02] tracking-[-0.045em] sm:text-4xl md:text-6xl md:leading-[1.05] md:tracking-[-0.04em] lg:text-7xl">
+              <h2 className="mt-5 max-w-4xl text-4xl font-semibold leading-[1.05] tracking-[-0.04em] md:text-6xl lg:text-7xl">
                 FROM THE FIELD
                 <br />
                 TO LEADING IT.
@@ -804,9 +723,9 @@ onMouseLeave={() => setPortraitMode("professional")}
             {/* Selected Projects */}
       <section
         id="projects"
-        className="border-t border-[var(--line)] px-6 py-14 md:px-10 md:py-32 lg:px-16"
+        className="border-t border-[var(--line)] px-6 py-24 md:px-10 md:py-32 lg:px-16"
       >
-        <div className="grid gap-10 md:gap-16 lg:grid-cols-12">
+        <div className="grid gap-16 lg:grid-cols-12">
 
           {/* Section label */}
           <div className="lg:col-span-3">
@@ -824,7 +743,7 @@ onMouseLeave={() => setPortraitMode("professional")}
           {/* Projects */}
           <div className="lg:col-span-9">
 
-            <div className="mb-10 md:mb-16">
+            <div className="mb-16">
               <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
                 PANAMA / HIGH-RISE CONSTRUCTION
               </p>
@@ -837,7 +756,7 @@ onMouseLeave={() => setPortraitMode("professional")}
             </div>
 
             {/* Mini Design House */}
-            <article className="group border-t border-[var(--line)] py-9 md:py-12">
+            <article className="group border-t border-[var(--line)] py-12">
               <div className="grid gap-10 md:grid-cols-[1fr_2fr]">
 
                 <div>
@@ -849,14 +768,7 @@ onMouseLeave={() => setPortraitMode("professional")}
     PANAMA CITY, PANAMA
   </p>
 
-  <div className="mt-7 flex items-start justify-between gap-4 md:hidden">
-    <h3 className="text-[1.85rem] font-semibold leading-tight tracking-[-0.04em]">
-      PH MINI DESIGN HOUSE 57
-    </h3>
-    <span className="shrink-0 text-2xl">↗</span>
-  </div>
-
-  <p className="mt-7 max-w-xs text-sm leading-7 text-[var(--muted)] md:mt-8">
+  <p className="mt-8 max-w-xs text-sm leading-7 text-[var(--muted)]">
     Helped lead the completion and handover of a 20-story residential
     project after the original contractor exited the project, working
     under a limited closeout budget and tight delivery schedule.
@@ -893,34 +805,18 @@ onMouseLeave={() => setPortraitMode("professional")}
 </div>
 
 <div>
- <div className="hidden items-start justify-between md:flex md:-mx-8 xl:-mx-24">
-  <h3 className="text-[1.85rem] font-semibold leading-tight tracking-[-0.04em] md:translate-x-4 md:whitespace-nowrap md:text-5xl xl:translate-x-10">
+ <div className="-mx-8 flex items-start justify-between xl:-mx-24">
+  <h3 className="translate-x-4 whitespace-nowrap text-3xl font-semibold tracking-[-0.04em] md:text-5xl xl:translate-x-10">
     PH MINI DESIGN HOUSE 57
   </h3>
 
-  <span className="text-2xl transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1">
+  <span className="text-2xl transition-transform duration-300 group-hover:translate-x-2">
     ↗
   </span>
 </div>
 
 {/* MDH Gallery */}
-<div className="mt-7 md:hidden">
-  <div className="flex w-full justify-center overflow-hidden">
-    <img src={mdhImages[mdhImage].src} alt={`PH Mini Design House 57 — ${mdhImages[mdhImage].label}`} className="max-h-[62vh] w-full object-contain" />
-  </div>
-  <div className="mt-4 flex items-end justify-between gap-4">
-    <div className="min-w-0">
-      <p className="text-[11px] font-medium tracking-[0.18em] text-[var(--muted)]">{String(mdhImage + 1).padStart(2, "0")} / 04</p>
-      <p className="mt-1 break-words text-lg font-semibold leading-tight tracking-[0.08em]">{mdhImages[mdhImage].label}</p>
-    </div>
-    <div className="flex shrink-0 gap-2">
-      <button type="button" aria-label="Previous PH Mini Design House 57 image" onClick={() => { setMdhManualPause(true); setMdhDirection("left"); setMdhPreviousImage(mdhImage); setMdhImage((mdhImage - 1 + mdhImages.length) % mdhImages.length); }} className="flex h-10 w-10 items-center justify-center border border-[var(--line)]">←</button>
-      <button type="button" aria-label="Next PH Mini Design House 57 image" onClick={() => { setMdhManualPause(true); setMdhDirection("right"); setMdhPreviousImage(mdhImage); setMdhImage((mdhImage + 1) % mdhImages.length); }} className="flex h-10 w-10 items-center justify-center border border-[var(--line)]">→</button>
-    </div>
-  </div>
-</div>
-
-<div className="mt-10 hidden md:block">
+<div className="mt-10">
  <div className="relative grid grid-cols-[0.85fr_1.7fr_0.85fr] items-center xl:-mx-24">
 
     {/* Previous */}
@@ -1079,7 +975,7 @@ onMouseLeave={() => setPortraitMode("professional")}
             </article>
 
             {/* Amazonas */}
-            <article className="group border-t border-[var(--line)] py-9 md:py-12">
+            <article className="group border-t border-[var(--line)] py-12">
               <div className="grid gap-10 md:grid-cols-[1fr_2fr]">
 
                 <div>
@@ -1091,14 +987,7 @@ onMouseLeave={() => setPortraitMode("professional")}
     PANAMA CITY, PANAMA
   </p>
 
-  <div className="mt-7 flex items-start justify-between gap-4 md:hidden">
-    <h3 className="text-[1.85rem] font-semibold leading-tight tracking-[-0.04em]">
-      PH AMAZONAS
-    </h3>
-    <span className="shrink-0 text-2xl">↗</span>
-  </div>
-
-  <p className="mt-7 max-w-xs text-sm leading-7 text-[var(--muted)] md:mt-8">
+  <p className="mt-8 max-w-xs text-sm leading-7 text-[var(--muted)]">
     Supported budgeting and project kickoff before supervising piling and
     foundation activities, including coordination of concrete, reinforcing
     steel, earthwork, and surrounding stakeholders.
@@ -1135,34 +1024,18 @@ onMouseLeave={() => setPortraitMode("professional")}
 </div>
 
 <div>
- <div className="hidden items-start justify-between md:flex md:-mx-8 xl:-mx-24">
-  <h3 className="text-[1.85rem] font-semibold leading-tight tracking-[-0.04em] md:translate-x-4 md:whitespace-nowrap md:text-5xl xl:translate-x-10">
+ <div className="-mx-8 flex items-start justify-between xl:-mx-24">
+  <h3 className="translate-x-4 whitespace-nowrap text-3xl font-semibold tracking-[-0.04em] md:text-5xl xl:translate-x-10">
     PH AMAZONAS
   </h3>
 
-  <span className="text-2xl transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1">
+  <span className="text-2xl transition-transform duration-300 group-hover:translate-x-2">
     ↗
   </span>
 </div>
 
 {/* Amazonas Gallery */}
-<div className="mt-7 md:hidden">
-  <div className="flex w-full justify-center overflow-hidden">
-    <img src={amazonasImages[amazonasImage].src} alt={`PH Amazonas — ${amazonasImages[amazonasImage].label}`} className="max-h-[62vh] w-full object-contain" />
-  </div>
-  <div className="mt-4 flex items-end justify-between gap-4">
-    <div className="min-w-0">
-      <p className="text-[11px] font-medium tracking-[0.18em] text-[var(--muted)]">{String(amazonasImage + 1).padStart(2, "0")} / 04</p>
-      <p className="mt-1 break-words text-lg font-semibold leading-tight tracking-[0.08em]">{amazonasImages[amazonasImage].label}</p>
-    </div>
-    <div className="flex shrink-0 gap-2">
-      <button type="button" aria-label="Previous PH Amazonas image" onClick={() => { setAmazonasManualPause(true); setAmazonasDirection("left"); setAmazonasPreviousImage(amazonasImage); setAmazonasImage((amazonasImage - 1 + amazonasImages.length) % amazonasImages.length); }} className="flex h-10 w-10 items-center justify-center border border-[var(--line)]">←</button>
-      <button type="button" aria-label="Next PH Amazonas image" onClick={() => { setAmazonasManualPause(true); setAmazonasDirection("right"); setAmazonasPreviousImage(amazonasImage); setAmazonasImage((amazonasImage + 1) % amazonasImages.length); }} className="flex h-10 w-10 items-center justify-center border border-[var(--line)]">→</button>
-    </div>
-  </div>
-</div>
-
-<div className="mt-10 hidden md:block">
+<div className="mt-10">
  <div className="relative grid grid-cols-[0.85fr_1.7fr_0.85fr] items-center xl:-mx-24">
 
     {/* Previous */}
@@ -1339,7 +1212,7 @@ onMouseLeave={() => setPortraitMode("professional")}
             </article>
 
             {/* The Walker */}
-            <article className="group border-y border-[var(--line)] py-9 md:py-12">
+            <article className="group border-y border-[var(--line)] py-12">
               <div className="grid gap-10 md:grid-cols-[1fr_2fr]">
 
                 <div>
@@ -1351,14 +1224,7 @@ onMouseLeave={() => setPortraitMode("professional")}
                     PANAMA CITY, PANAMA
                   </p>
 
-                  <div className="mt-7 flex items-start justify-between gap-4 md:hidden">
-                    <h3 className="text-[1.85rem] font-semibold leading-tight tracking-[-0.04em]">
-                      PH THE WALKER
-                    </h3>
-                    <span className="shrink-0 text-2xl">↗</span>
-                  </div>
-
-                  <p className="mt-7 max-w-xs text-sm leading-7 text-[var(--muted)] md:mt-8">
+                  <p className="mt-8 max-w-xs text-sm leading-7 text-[var(--muted)]">
                     Progressed from preconstruction and field supervision into
                     production leadership, coordinating structural activities,
                     procurement, schedules, field resources, and a workforce of
@@ -1396,34 +1262,18 @@ onMouseLeave={() => setPortraitMode("professional")}
                 </div>
 
                 <div>
-                  <div className="hidden items-start justify-between md:flex md:-mx-8 xl:-mx-24">
-                    <h3 className="text-[1.85rem] font-semibold leading-tight tracking-[-0.04em] md:translate-x-4 md:whitespace-nowrap md:text-5xl xl:translate-x-10">
+                  <div className="-mx-8 flex items-start justify-between xl:-mx-24">
+                    <h3 className="translate-x-4 whitespace-nowrap text-3xl font-semibold tracking-[-0.04em] md:text-5xl xl:translate-x-10">
                       PH THE WALKER
                     </h3>
 
-                    <span className="text-2xl transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1">
+                    <span className="text-2xl transition-transform duration-300 group-hover:translate-x-2">
                       ↗
                     </span>
                   </div>
 
                   {/* Walker Gallery */}
-<div className="mt-7 md:hidden">
-  <div className="flex w-full justify-center overflow-hidden">
-    <img src={walkerImages[walkerImage].src} alt={`PH The Walker — ${walkerImages[walkerImage].label}`} className="max-h-[62vh] w-full object-contain" />
-  </div>
-  <div className="mt-4 flex items-end justify-between gap-4">
-    <div className="min-w-0">
-      <p className="text-[11px] font-medium tracking-[0.18em] text-[var(--muted)]">{String(walkerImage + 1).padStart(2, "0")} / 05</p>
-      <p className="mt-1 break-words text-lg font-semibold leading-tight tracking-[0.08em]">{walkerImages[walkerImage].label}</p>
-    </div>
-    <div className="flex shrink-0 gap-2">
-      <button type="button" aria-label="Previous PH The Walker image" onClick={() => { setWalkerManualPause(true); setWalkerDirection("left"); setWalkerPreviousImage(walkerImage); setWalkerImage((walkerImage - 1 + walkerImages.length) % walkerImages.length); }} className="flex h-10 w-10 items-center justify-center border border-[var(--line)]">←</button>
-      <button type="button" aria-label="Next PH The Walker image" onClick={() => { setWalkerManualPause(true); setWalkerDirection("right"); setWalkerPreviousImage(walkerImage); setWalkerImage((walkerImage + 1) % walkerImages.length); }} className="flex h-10 w-10 items-center justify-center border border-[var(--line)]">→</button>
-    </div>
-  </div>
-</div>
-
-                  <div className="mt-10 hidden md:block">
+                  <div className="mt-10">
                     <div className="relative grid grid-cols-[0.85fr_1.7fr_0.85fr] items-center xl:-mx-24">
 
                       {/* Previous */}
@@ -1603,72 +1453,44 @@ onMouseLeave={() => setPortraitMode("professional")}
                   {/* AI + Construction */}
       <section
         id="ai"
-        className="relative overflow-hidden border-t border-[var(--line)]"
+        className="relative overflow-hidden border-t border-[var(--line)] px-6 py-20 md:px-10 md:py-24 lg:px-16"
       >
-        {/* Full-section living network background */}
-        <video
-          key={theme}
-          className={`pointer-events-none absolute left-1/2 top-1/2 h-[108%] w-[108%] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover transition-opacity duration-700 ${
-            theme === "dark" ? "opacity-85" : "opacity-80"
-          }`}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-        >
-          <source
-            src={
-              theme === "dark"
-                ? "/videos/ai-network-dark.mp4"
-                : "/videos/ai-network-light.mp4"
-            }
-            type="video/mp4"
-          />
-        </video>
-
-        {/* Theme-aware readability veil */}
+        {/* Background drafting grid */}
         <div
           aria-hidden="true"
-          className={`pointer-events-none absolute inset-0 transition-colors duration-700 ${
-            theme === "dark" ? "bg-[#111312]/65" : "bg-[#f1efe9]/58"
-          }`}
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0"
+          className="pointer-events-none absolute inset-0 opacity-[0.025]"
           style={{
-            background:
-              theme === "dark"
-                ? "linear-gradient(180deg, rgba(23,25,24,0.88) 0%, rgba(23,25,24,0.36) 22%, rgba(23,25,24,0.30) 72%, rgba(23,25,24,0.88) 100%)"
-                : "linear-gradient(180deg, rgba(241,239,233,0.90) 0%, rgba(241,239,233,0.48) 22%, rgba(241,239,233,0.42) 72%, rgba(241,239,233,0.92) 100%)",
+            backgroundImage:
+              "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
+            backgroundSize: "72px 72px",
           }}
         />
 
-        <div className="relative z-10 px-6 py-14 md:px-10 md:py-20 lg:px-16 lg:py-20">
-          <div className="grid gap-12 lg:grid-cols-12">
-            {/* Section label */}
-            <div className="lg:col-span-3">
-              <p className="text-xs tracking-[0.2em] text-[var(--muted)]">
-                04 / AI + CONSTRUCTION
-              </p>
-              <p className="mt-6 max-w-xs text-sm leading-6 text-[var(--muted)]">
-                An evolving space for projects, AI agents, case studies, research,
-                and ideas exploring technology across the built environment.
-              </p>
-              <div className="mt-10 hidden border-t border-[var(--line)]/70 pt-5 lg:block">
-                <p className="text-[10px] tracking-[0.18em] text-[var(--muted)]">
-                  STATUS / IN DEVELOPMENT
-                </p>
-                <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
-                  This section is being built.
-                </p>
-              </div>
-            </div>
+        <div className="relative z-10 grid gap-12 lg:grid-cols-12">
+          {/* Section label */}
+          <div className="lg:col-span-3">
+            <p className="text-xs tracking-[0.2em] text-[var(--muted)]">
+              04 / AI + CONSTRUCTION
+            </p>
 
-            {/* Main content */}
-            <div className="lg:col-span-9">
+            <p className="mt-6 max-w-xs text-sm leading-6 text-[var(--muted)]">
+              An evolving space for projects, AI agents, case studies, research,
+              and ideas exploring technology across the built environment.
+            </p>
+
+            <div className="mt-10 hidden border-t border-[var(--line)] pt-5 lg:block">
+              <p className="text-[10px] tracking-[0.18em] text-[var(--muted)]">
+                STATUS / IN DEVELOPMENT
+              </p>
+              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+                This section is being built.
+              </p>
+            </div>
+          </div>
+
+          {/* Main content */}
+          <div className="lg:col-span-9">
+            <div className="mb-12">
               <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
                 EXPLORING WHAT&apos;S POSSIBLE
               </p>
@@ -1679,85 +1501,120 @@ onMouseLeave={() => setPortraitMode("professional")}
                 A BETTER WAY.
               </h2>
 
-              <p className="mt-7 max-w-2xl text-base leading-7 text-[var(--muted)] md:mt-8 md:text-lg md:leading-8">
+              <p className="mt-8 max-w-2xl text-lg leading-8 text-[var(--muted)]">
                 My interest in construction technology comes from a principle
                 I&apos;ve carried from the field: there&apos;s always a better way.
                 This space will document how I&apos;m exploring AI, automation, BIM,
                 and emerging technologies to improve how projects are planned,
                 coordinated, managed, and delivered.
               </p>
+            </div>
 
-              {/* Central identity */}
-              <div className="my-10 flex justify-center md:my-12">
-                <div className="text-center">
-                  <p className="text-[10px] font-medium tracking-[0.34em] text-[#b7975d]">
-                    THE NEXT LAYER
-                  </p>
-                  <h3 className="mt-3 text-[2.15rem] font-semibold leading-none tracking-[-0.055em] sm:whitespace-nowrap sm:text-[2.4rem] md:text-[clamp(2.4rem,4.6vw,5.2rem)] md:tracking-[-0.06em]">
-                    AI + CONSTRUCTION
-                  </h3>
-                  <div className="mx-auto mt-4 h-px w-20 bg-[#b7975d]/80" />
-                </div>
-              </div>
+            {/* Living network */}
+            <div className="relative min-h-[560px] overflow-hidden border border-[var(--line)] md:min-h-[620px]">
+              <video
+                className={`pointer-events-none absolute left-1/2 top-1/2 h-[106%] w-[106%] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover transition-all duration-700 ${
+                  theme === "dark"
+                    ? "opacity-75 brightness-[0.72] contrast-[1.08] saturate-[0.75]"
+                    : "opacity-20 brightness-[1.35] contrast-[0.75] grayscale"
+                }`}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-hidden="true"
+              >
+                <source src="/videos/ai-network-dark.mp4" type="video/mp4" />
+              </video>
 
-              {/* Future destinations */}
-              <div className="grid border-l border-t border-[var(--line)]/80 md:grid-cols-2">
+              {/* Theme/readability treatment */}
+              <div
+                aria-hidden="true"
+                className={`pointer-events-none absolute inset-0 ${
+                  theme === "dark"
+                    ? "bg-[var(--background)]/20"
+                    : "bg-[var(--background)]/65"
+                }`}
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    theme === "dark"
+                      ? "radial-gradient(circle at center, transparent 0%, rgba(23,25,24,0.08) 42%, rgba(23,25,24,0.72) 100%)"
+                      : "radial-gradient(circle at center, rgba(241,239,233,0.18) 0%, rgba(241,239,233,0.62) 58%, rgba(241,239,233,0.94) 100%)",
+                }}
+              />
+
+              {/* Real HTML labels over the generated network */}
+              <div className="relative z-10 grid min-h-[560px] grid-cols-2 grid-rows-2 md:min-h-[620px]">
                 {[
                   {
                     number: "01",
                     title: "PROJECTS",
-                    description: "Academic and independent work across construction, management, technology, AI, and BIM.",
+                    description: "Academic + independent work",
+                    position: "items-start justify-start text-left",
                   },
                   {
                     number: "02",
                     title: "AI AGENTS",
-                    description: "Intelligent agents and automated workflows designed around construction-management processes.",
+                    description: "Intelligent construction workflows",
+                    position: "items-start justify-end text-right",
                   },
                   {
                     number: "03",
                     title: "CASE STUDIES",
-                    description: "Real construction problems explored through process improvement, technology, and automation.",
+                    description: "Problems, processes + better solutions",
+                    position: "items-end justify-start text-left",
                   },
                   {
                     number: "04",
                     title: "RESEARCH + WRITING",
-                    description: "Research, observations, and perspectives on AI, construction technology, and industry change.",
+                    description: "Ideas, observations + industry change",
+                    position: "items-end justify-end text-right",
                   },
                 ].map((area) => (
-                  <a
+                  <div
                     key={area.number}
-                    href="#ai"
-                    aria-label={`${area.title} — coming soon`}
-                    className={`group relative min-h-[205px] border-b border-r border-[var(--line)]/80 p-6 backdrop-blur-[2px] transition-all duration-500 md:min-h-[220px] md:p-7 ${
-                      theme === "dark"
-                        ? "bg-[#171918]/30 hover:bg-[#171918]/55"
-                        : "bg-[#f1efe9]/28 hover:bg-[#f1efe9]/58"
-                    }`}
+                    className={`flex p-6 md:p-8 ${area.position}`}
                   >
-                    <div className="flex items-start justify-between gap-6">
+                    <div className="max-w-[250px] bg-[var(--background)]/70 p-4 backdrop-blur-[2px] md:p-5">
                       <p className="text-[10px] tracking-[0.2em] text-[var(--muted)]">
                         {area.number} / IN DEVELOPMENT
                       </p>
-                      <span className="text-xl transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1">
-                        ↗
-                      </span>
-                    </div>
-                    <div className="mt-7 flex flex-col gap-3">
-                      <h4 className="text-2xl font-semibold tracking-[-0.03em] md:text-3xl">
+                      <h3 className="mt-3 text-xl font-semibold tracking-[0.04em] md:text-2xl">
                         {area.title}
-                      </h4>
-                      <p className="max-w-md text-sm leading-6 text-[var(--muted)]">
+                      </h3>
+                      <p className="mt-2 text-xs leading-5 text-[var(--muted)]">
                         {area.description}
                       </p>
-                      <p className="mt-1 text-[10px] tracking-[0.18em] text-[#b7975d]">
-                        COMING SOON
-                      </p>
                     </div>
-                  </a>
+                  </div>
                 ))}
               </div>
 
-              
+              {/* Center marker */}
+              <div className="pointer-events-none absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full border border-[#b7975d]/60 bg-[var(--background)]/75 backdrop-blur-sm md:h-24 md:w-24">
+                  <div className="text-center">
+                    <p className="text-[9px] tracking-[0.2em] text-[var(--muted)]">AI +</p>
+                    <p className="mt-1 text-[10px] font-semibold tracking-[0.14em]">CONSTRUCTION</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Technical corner marks */}
+              <span className="pointer-events-none absolute left-4 top-4 h-5 w-5 border-l border-t border-[#b7975d]/60" />
+              <span className="pointer-events-none absolute right-4 top-4 h-5 w-5 border-r border-t border-[#b7975d]/60" />
+              <span className="pointer-events-none absolute bottom-4 left-4 h-5 w-5 border-b border-l border-[#b7975d]/60" />
+              <span className="pointer-events-none absolute bottom-4 right-4 h-5 w-5 border-b border-r border-[#b7975d]/60" />
+            </div>
+
+            <div className="mt-6 flex flex-col gap-3 border-t border-[var(--line)] pt-5 text-[10px] tracking-[0.16em] text-[var(--muted)] sm:flex-row sm:items-center sm:justify-between">
+              <span>PROJECTS / AGENTS / CASE STUDIES / RESEARCH</span>
+              <span className="text-[var(--foreground)]">THIS SECTION IS BEING BUILT.</span>
             </div>
           </div>
         </div>
@@ -1765,7 +1622,7 @@ onMouseLeave={() => setPortraitMode("professional")}
             {/* Contact */}
       <section
         id="contact"
-        className="border-t border-[var(--line)] px-6 pt-14 md:px-10 md:pt-32 lg:px-16"
+        className="border-t border-[var(--line)] px-6 pt-24 md:px-10 md:pt-32 lg:px-16"
       >
         <div className="grid gap-16 lg:grid-cols-12">
 
@@ -1778,7 +1635,7 @@ onMouseLeave={() => setPortraitMode("professional")}
 
           {/* Main contact */}
           <div className="lg:col-span-9">
-            <p className="text-xs tracking-[0.18em] text-[#b7975d]">
+            <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
               LET&apos;S CONNECT
             </p>
 
@@ -1793,12 +1650,12 @@ WHAT&apos;S NEXT.
             </p>
 
             {/* Contact links */}
-            <div className="mt-12 border-t border-[var(--line)]">
+            <div className="mt-16 border-t border-[var(--line)]">
               <a
   href="mailto:juandacarranza@gmail.com"
-  className="group flex items-center justify-between border-b border-[var(--line)] px-3 py-6 transition-colors duration-300 hover:bg-[var(--foreground)]/[0.035]"
+  className="group flex items-center justify-between border-b border-[var(--line)] py-6"
 >
-  <div className="transition-transform duration-300 group-hover:translate-x-1">
+  <div>
     <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
       EMAIL / PRIMARY
     </p>
@@ -1807,15 +1664,15 @@ WHAT&apos;S NEXT.
     </p>
   </div>
 
-  <span className="text-2xl transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#b7975d]">
+  <span className="text-2xl transition-transform duration-300 group-hover:translate-x-2">
     ↗
   </span>
 </a>
 <a
   href="mailto:jcarra47@asu.edu"
-  className="group flex items-center justify-between border-b border-[var(--line)] px-3 py-6 transition-colors duration-300 hover:bg-[var(--foreground)]/[0.035]"
+  className="group flex items-center justify-between border-b border-[var(--line)] py-6"
 >
-  <div className="transition-transform duration-300 group-hover:translate-x-1">
+  <div>
     <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
       EMAIL / ASU
     </p>
@@ -1824,7 +1681,7 @@ WHAT&apos;S NEXT.
     </p>
   </div>
 
-  <span className="text-2xl transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#b7975d]">
+  <span className="text-2xl transition-transform duration-300 group-hover:translate-x-2">
     ↗
   </span>
 </a>
@@ -1833,9 +1690,9 @@ WHAT&apos;S NEXT.
                 href="https://linkedin.com/in/jdca3011"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center justify-between border-b border-[var(--line)] px-3 py-6 transition-colors duration-300 hover:bg-[var(--foreground)]/[0.035]"
+                className="group flex items-center justify-between border-b border-[var(--line)] py-6"
               >
-                <div className="transition-transform duration-300 group-hover:translate-x-1">
+                <div>
                   <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
                     LINKEDIN
                   </p>
@@ -1844,18 +1701,16 @@ WHAT&apos;S NEXT.
                   </p>
                 </div>
 
-                <span className="text-2xl transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#b7975d]">
+                <span className="text-2xl transition-transform duration-300 group-hover:translate-x-2">
                   ↗
                 </span>
               </a>
 
               <a
                 href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-between border-b border-[var(--line)] px-3 py-6 transition-colors duration-300 hover:bg-[var(--foreground)]/[0.035]"
+                className="group flex items-center justify-between border-b border-[var(--line)] py-6"
               >
-                <div className="transition-transform duration-300 group-hover:translate-x-1">
+                <div>
                   <p className="text-xs tracking-[0.18em] text-[var(--muted)]">
                     RÉSUMÉ
                   </p>
@@ -1864,8 +1719,8 @@ WHAT&apos;S NEXT.
                   </p>
                 </div>
 
-                <span className="text-2xl transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#b7975d]">
-                  ↗
+                <span className="text-2xl transition-transform duration-300 group-hover:translate-x-2">
+                  ↓
                 </span>
               </a>
             </div>
@@ -1873,19 +1728,21 @@ WHAT&apos;S NEXT.
         </div>
 
         {/* Footer */}
-        <footer className="relative mt-16 flex flex-col gap-6 border-t border-[var(--line)] py-8 text-xs tracking-[0.14em] text-[var(--muted)] md:flex-row md:items-center md:justify-between">
-          <div aria-hidden="true" className="absolute -top-px left-0 h-px w-20 bg-[#b7975d]" />
+        <footer className="mt-24 flex flex-col gap-6 border-t border-[var(--line)] py-8 text-xs tracking-[0.14em] text-[var(--muted)] md:flex-row md:items-center md:justify-between">
           <p>© 2026 JUAN D. CARRANZA</p>
 
           <div className="flex flex-wrap gap-6">
             <span>PANAMA / USA</span>
+            <a href="#" className="text-[var(--foreground)]">
+              BACK TO TOP ↑
+            </a>
           </div>
         </footer>
       </section>
       <a
   href="#top"
   aria-label="Back to top"
-  className="fixed bottom-3 left-3 z-50 flex h-9 w-9 items-center justify-center rounded-full border border-[var(--line)] bg-[var(--background)]/65 text-sm text-[var(--foreground)] opacity-65 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-[var(--foreground)] hover:text-[var(--background)] hover:opacity-100 md:bottom-6 md:left-6 md:h-11 md:w-11 md:text-lg md:opacity-100"
+  className="fixed bottom-6 left-6 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-[var(--line)] bg-[var(--background)]/80 text-lg text-[var(--foreground)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-[var(--foreground)] hover:text-[var(--background)]"
 >
   ↑
 </a>
